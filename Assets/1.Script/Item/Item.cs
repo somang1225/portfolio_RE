@@ -11,21 +11,49 @@ public class Item : MonoBehaviour
 
     Image icon;
     Text text_Level;
+    Collider2D collider2D;
+    
+
     private void Awake()
     {
+        /*
         icon = GetComponentsInChildren<Image>()[1];
         icon.sprite = data.itemIcon;
 
         Text[] texts = GetComponentsInChildren<Text>();
         text_Level = texts[0];
+        */
+        collider2D = GetComponent<Collider2D>();
+
+        
+    }
+        
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        
+         if(collision.gameObject.tag == "Player")
+        {
+
+            switch (data.itemType)
+            {
+                case ItemData.ItemType.Gold:
+                    Debug.Log("골드 획득");
+                    
+                    GameManager.instance.gold++;
+                    
+                    break;
+            }
+            Destroy(collision.gameObject);
+        }   
     }
 
+    /*
     private void LateUpdate()
     {
         text_Level.text = "Lv." + (weapon_level + 1);
     }
 
-    /*
+    
     public void LevelUP_Click()
     {
         switch (data.itemType)

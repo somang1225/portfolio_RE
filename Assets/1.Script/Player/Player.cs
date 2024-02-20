@@ -68,23 +68,36 @@ public class Player : MonoBehaviour
     private void OnCollisionStay2D(Collision2D collision)
     {
         //몬스터에게 데미지를 입는 경우
-        GameManager.instance.player_Hp -= Time.deltaTime * collision.collider.GetComponent<Enemy>().damage;
+        if(collision.gameObject.tag == "Enemy")
+        {
+            GameManager.instance.player_Hp -= Time.deltaTime * collision.collider.GetComponent<Enemy>().damage;
+        }
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) 
+    private void OnTriggerEnter2D(Collider2D other) {
+        
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) 
     {
-        if(collider2D.gameObject.tag == "Item")
+        if(collision.gameObject.tag == "Item")
         {
             Item item = collision.gameObject.GetComponent<Item>();
-
             switch (item.data.itemType)
             {
                 case ItemData.ItemType.Gold:
+                    Debug.Log("골드 획득");
                     GameManager.instance.gold++;
                     break;
             }
-        }    
+            Destroy(collision.gameObject);
+        } 
     }
-
+    /*
+    private void OnTriggerEnter2D(Collider2D collision) 
+    {
+           
+    }
+    */
 }

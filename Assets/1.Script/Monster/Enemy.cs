@@ -119,7 +119,7 @@ public class Enemy : MonoBehaviour //, IPoolObject
             
             if(item_ran < 2) //아이템 획득 실패 20%
             {
-                Debug.Log("아이템 획득 실패");
+                //Debug.Log("아이템 획득 실패");
             }
             else if (item_ran < 4) //장비 아이템 획득 20%
             {

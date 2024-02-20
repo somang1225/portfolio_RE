@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ItemData : ScriptableObject
 {
-    public enum ItemType {  Melee, Range, Glove, Shose, Heal, Gold } //근접공격 / 원거리공격 / 장갑 / 신발 / 힐 (5가지 타입)
+    public enum ItemType {  Melee, Range, Glove, Shose, Heal, Gold } //근접공격 / 원거리공격 / 장갑 / 신발 / 힐 / 골드
 
     //기본 데이터
     [Header("Main Info")]

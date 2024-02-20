@@ -100,8 +100,8 @@ public class GameManager : MonoBehaviour
         {
             kill_num = 0;
             stage++;
-            Debug.Log("현재 스테이지");
-            Debug.Log(stage+1);
+            Debug.Log("현재 스테이지" + stage);
+            
 
         }
         

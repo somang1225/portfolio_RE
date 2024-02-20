@@ -10,20 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d6b8b63f652246c8a365e4940fbb4b0, type: 3}
-  m_Name: Item0
+  m_Name: Gold
   m_EditorClassIdentifier: 
+  itemType: 5
   itemID: 0
-  itemName: "\uC0BD"
+  itemName: "\uACE8\uB4DC"
   itemDesc: 
-  itemType: 0
-  itemIcon: {fileID: -181907988, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
-  baseDamage: 4.5
-  baseCount: 3
-  damages:
-  - 0.5
-  - 1
-  - 1.5
-  - 2
-  - 3
-  counts: 0100000001000000010000000100000002000000
-  projectile: {fileID: 3567011364292403584, guid: 5ac1a3be0ce854aac9e9079fc9603870, type: 3}
+  itemIcon: {fileID: 372016581, guid: 274d64617113287499ed1c4165d1d8f3, type: 3}
+  baseDamage: 0
+  baseCount: 0
+  damages: []
+  counts: 
+  projectile: {fileID: 0}
