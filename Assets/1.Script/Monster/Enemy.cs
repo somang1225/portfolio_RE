@@ -11,6 +11,9 @@ public class Enemy : MonoBehaviour //, IPoolObject
     public float speed;
     public float damage;
 
+    //드랍용 아이템
+    public GameObject itemGold;
+
     public Rigidbody2D target;
     public RuntimeAnimatorController[] animCon;
 
@@ -107,6 +110,28 @@ public class Enemy : MonoBehaviour //, IPoolObject
             animator.SetBool("Dead", true);
             GameManager.instance.GetExp();
             Vector3 deadPos = gameObject.transform.position;
+
+            //골드 드랍
+            float gold_ran = Random.Range(1, 1.3f); //1~1.3배 정도의 골드 수급
+            Instantiate(itemGold, transform.position, itemGold.transform.rotation);
+            
+            int item_ran = Random.Range(0, 10); //아이템 드랍 확률
+            
+            if(item_ran < 2) //아이템 획득 실패 20%
+            {
+                Debug.Log("아이템 획득 실패");
+            }
+            else if (item_ran < 4) //장비 아이템 획득 20%
+            {
+                Instantiate(itemGold, transform.position, itemGold.transform.rotation);
+            }
+            else if (item_ran < 10) //소비 아이템 획득 60%
+            {
+                Instantiate(itemGold, transform.position, itemGold.transform.rotation);
+            }
+
+
+
         }
     }
 
