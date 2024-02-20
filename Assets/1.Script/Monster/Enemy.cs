@@ -112,8 +112,8 @@ public class Enemy : MonoBehaviour //, IPoolObject
             Vector3 deadPos = gameObject.transform.position;
 
             //골드 드랍
-            float gold_ran = Random.Range(1, 1.3f); //1~1.3배 정도의 골드 수급
-            Instantiate(itemGold, transform.position, itemGold.transform.rotation);
+            //float gold_ran = Random.Range(1, 1.3f); //1~1.3배 정도의 골드 수급
+            //Instantiate(itemGold, transform.position, itemGold.transform.rotation);
             
             int item_ran = Random.Range(0, 10); //아이템 드랍 확률
             

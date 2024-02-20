@@ -25,6 +25,7 @@ public class Item : MonoBehaviour
         text_Level.text = "Lv." + (weapon_level + 1);
     }
 
+    /*
     public void LevelUP_Click()
     {
         switch (data.itemType)
@@ -52,5 +53,6 @@ public class Item : MonoBehaviour
         }
 
     }
+    */
 
 }

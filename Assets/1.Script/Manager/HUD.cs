@@ -75,7 +75,7 @@ public class HUD : MonoBehaviour
                 break;
 
             case InfoType.Gold:
-                mytext.text = string.Format("{0}", GameManager.instance.kill_num); //임시로 킬 수 적용
+                mytext.text = string.Format("{0}", GameManager.instance.gold); 
                 break;
         }
     }

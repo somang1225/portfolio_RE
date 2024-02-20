@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public GameObject Shadow;
 
     Collider2D collider2D;
+    
     Rigidbody2D rigidbody2D;
     SpriteRenderer spriteRenderer;
     Animator animator;
@@ -71,5 +72,19 @@ public class Player : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter2D(Collider2D collision) 
+    {
+        if(collider2D.gameObject.tag == "Item")
+        {
+            Item item = collision.gameObject.GetComponent<Item>();
+
+            switch (item.data.itemType)
+            {
+                case ItemData.ItemType.Gold:
+                    GameManager.instance.gold++;
+                    break;
+            }
+        }    
+    }
 
 }
