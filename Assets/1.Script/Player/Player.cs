@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
             switch (item.data.itemType)
             {
                 case ItemData.ItemType.Gold:
-                    Debug.Log("골드 획득");
+                    //Debug.Log("골드 획득");
                     GameManager.instance.gold++;
                     break;
             }

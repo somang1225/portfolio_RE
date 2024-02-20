@@ -27,25 +27,7 @@ public class Item : MonoBehaviour
 
         
     }
-        
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        
-         if(collision.gameObject.tag == "Player")
-        {
-
-            switch (data.itemType)
-            {
-                case ItemData.ItemType.Gold:
-                    Debug.Log("골드 획득");
-                    
-                    GameManager.instance.gold++;
-                    
-                    break;
-            }
-            Destroy(collision.gameObject);
-        }   
-    }
 
     /*
     private void LateUpdate()

@@ -91,6 +91,7 @@ public class Enemy : MonoBehaviour //, IPoolObject
         }
 
         hp -= collision.GetComponent<Bullet>().damage;
+        //Debug.Log(collision.GetComponent<Bullet>().damage);
 
         StartCoroutine(KnockBack());
         

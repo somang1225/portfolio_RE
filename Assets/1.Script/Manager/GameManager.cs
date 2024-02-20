@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -26,6 +27,13 @@ public class GameManager : MonoBehaviour
     public float player_Max_Hp;
     public float player_Mp;
     public float player_Max_Mp;
+
+    [Header("AP State")]
+    //AP관련 스탯
+    public int ap_Damage;
+    public int ap_HP;
+    public int ap_MP;
+
 
     [Header("Game Money")]
     //게임 재화
@@ -113,6 +121,8 @@ public class GameManager : MonoBehaviour
         if (!skill_Panel.activeSelf)
         {
             skill_Panel.SetActive(true);
+            reinfo_Pannel.SetActive(false);
+            info_Panel.SetActive(false);
         }
 
         else
@@ -125,7 +135,9 @@ public class GameManager : MonoBehaviour
     {
         if (!reinfo_Pannel.activeSelf)
         {
+            skill_Panel.SetActive(false);
             reinfo_Pannel.SetActive(true);
+            info_Panel.SetActive(false);
         }
 
         else
@@ -138,6 +150,8 @@ public class GameManager : MonoBehaviour
     {
         if (!info_Panel.activeSelf)
         {
+            skill_Panel.SetActive(false);
+            reinfo_Pannel.SetActive(false);
             info_Panel.SetActive(true);
         }
 
@@ -145,6 +159,19 @@ public class GameManager : MonoBehaviour
         {
             info_Panel.SetActive(false);
         }
+    }
+
+    public void Click_AP_Btn()
+    {
+        if(ap != 0)
+        {
+            ap--;
+            
+        }
+
+        string name = gameObject.name;
+        //string name = gameObject.transform.parent.gameObject.name;
+        Debug.Log(name);
     }
 
 }
