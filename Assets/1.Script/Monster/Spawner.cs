@@ -29,7 +29,7 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        stage_level = GameManager.instance.stage;
+        stage_level = GameManager.Instance.stage;
 
         if (timer > spawnDatas[stage_level] .monster_spawnTime)
         {
@@ -43,7 +43,7 @@ public class Spawner : MonoBehaviour
 
     void Spawn()
     {
-        GameObject enemy = GameManager.instance.pool.Get_monster(0);
+        GameObject enemy = GameManager.Instance.pool.Get_monster(0);
         enemy.transform.position = spawnerPoint[Random.Range(1 , spawnerPoint.Length)].position;
         enemy.GetComponent<Enemy>().Init(spawnDatas[stage_level]);
     }

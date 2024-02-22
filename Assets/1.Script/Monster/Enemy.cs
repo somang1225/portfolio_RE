@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour //, IPoolObject
     //오브젝트 풀링으로 다시 오브젝트 활성화
     private void OnEnable()
     {
-        target = GameManager.instance.player.GetComponent<Rigidbody2D>();
+        target = GameManager.Instance.player.GetComponent<Rigidbody2D>();
         isLive = true;
         collider2D.enabled = true;
         rigidbody2D.simulated = true;
@@ -103,13 +103,13 @@ public class Enemy : MonoBehaviour //, IPoolObject
         }
         else // 몬스터 피가 0보다 작거나 같을 때
         {
-            GameManager.instance.GetKill();
+            GameManager.Instance.GetKill();
             isLive = false;
             collider2D.enabled = false;
             rigidbody2D.simulated = false;
             spriteRenderer.sortingOrder = 1;
             animator.SetBool("Dead", true);
-            GameManager.instance.GetExp();
+            GameManager.Instance.GetExp();
             Vector3 deadPos = gameObject.transform.position;
 
             //골드 드랍
@@ -140,7 +140,7 @@ public class Enemy : MonoBehaviour //, IPoolObject
     IEnumerator KnockBack()
     {
         yield return wait; //하나의 물리 프레임 딜레이      //null 값이면 1프레임 쉬고 또는 시간을 통해 기다리게 할 수 있다.
-        Vector3 playerPos = GameManager.instance.player.transform.position;
+        Vector3 playerPos = GameManager.Instance.player.transform.position;
         Vector3 dirVec = transform.position - playerPos;
         rigidbody2D.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
     }

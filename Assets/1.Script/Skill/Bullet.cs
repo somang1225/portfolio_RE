@@ -15,9 +15,10 @@ public class Bullet : MonoBehaviour
     }
 
     //무기의 기본적인 스텟
-    public void Init(float damage, int per, Vector3 dir)
+    public void Init(float pre_damage, int per, Vector3 dir)
     {
-        this.damage = damage;
+        //pre = 무기상수 // 무기 데미지 = 무기상수 + 케릭터 데미지 강화
+        this.damage = pre_damage + GameManager.Instance.player_damage;
         this.per = per;
 
         if(per > -1)

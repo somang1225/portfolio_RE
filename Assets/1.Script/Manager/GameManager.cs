@@ -5,44 +5,71 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-
-    //게임 플레이 관련 변수
-    [Header("Game Control")]
-    public float playTime;
-    public float maxplayTime;
-    public int stage;
+    private static GameManager instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if(instance == null)
+            {
+                return null;
+            }
+            return instance;
+        }
+    }
+    
+    public float playTime{get; private set;}
+    public float maxplayTime{get; private set;}
+    public int stage{get; private set;}
 
     [Header("Player Info")]
     //게임 성장 관련 변수
-    public int exp;
-    public int[] nextExp = {  };  //임시용 경험치통
-    public int level;
-    public int kill_num;
+    [SerializeField] int exp;
+    [SerializeField] int[] nextExp = {  };  //임시용 경험치통
+    public int level{get; private set;}
+    public int kill_num{get; private set;}
     public int[] max_kill_num = { }; //임시용 스테이지 클리어 몬스터 수
     public int ap;
-    public int sp;
-    public int power;
+    public int sp{get; private set;}
+    public int player_damage; //추가요소 : AP  //사용처 : 무기
     public float player_Hp;
     public float player_Max_Hp;
     public float player_Mp;
     public float player_Max_Mp;
 
-    [Header("AP State")]
-    //AP관련 스탯
-    public int ap_Damage;
-    public int ap_HP;
-    public int ap_MP;
+    [Header("AP Info")]
+
+    //ap 능력치 레벨
+    public int ap_damage_Level;
+    public int ap_hp_Level;
+    public int ap_mp_Level;
+
+    //ap 능력치 증가량
+    public int ap_damage;
+    public int ap_hp;
+    public int ap_mp;
+
+    //ap 증가 수치
+    int ap_damage_plus;
+    public static int Ap_damage_plus{get => Instance.ap_damage_plus; private set => Instance.ap_damage_plus = value; }
+
+    //public int ap_damage_plus{get; private set;}
+    public int ap_hp_plus{get; private set;}
+    public int ap_mp_plus{get; private set;}
+
+
 
 
     [Header("Game Money")]
     //게임 재화
-    public int gold;
     public int pp;
+    public int gold{get; private set;}
+
 
     [Header("Game Script")]
     //스크립트 연결
     public Player player;
+
     public PoolManager pool;
 
     [Header("Game Object")]
@@ -53,17 +80,30 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
-        player_Max_Hp = 100;
-        player_Max_Mp = 100;
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+        
+        
+        Ap_damage_plus = 3;
+        ap_hp_plus = 10;
+        ap_mp_plus = 10;
         maxplayTime = 60 * 1.5f;
         max_kill_num = new int[] { 10, 10, 10, 30, 300, 500, 800, 1000 };
-        nextExp = new int[] { 10, 20, 20, 20, 30, 50, 50, 60 } ; 
+        nextExp = new int[] { 5, 10, 20, 20, 30, 50, 50, 60 } ; 
 }
 
     private void Start()
     {
-        kill_num = 0;
+        //kill_num = 0;
+        player_Max_Hp = 100;
+        player_Max_Mp = 100;
         player_Hp = player_Max_Hp;
         player_Mp = player_Max_Mp;
         
@@ -100,7 +140,12 @@ public class GameManager : MonoBehaviour
             player_Mp = player_Max_Mp;
         }
     }
-
+    public float HUD_Exp()
+    {
+        float curExp = exp;
+        float curMaxExp = nextExp[level];
+        return curExp/curMaxExp;
+    }
     public void GetKill()
     {
         kill_num++;
@@ -113,6 +158,16 @@ public class GameManager : MonoBehaviour
 
         }
         
+    }
+    public void GetItem(Item item)
+    {
+        switch (item.data.itemType)
+        {   //골드 먹을 경우
+            case ItemData.ItemType.Gold:
+                //Debug.Log("골드 획득");
+                GameManager.Instance.gold++;
+                break;
+        }
     }
 
     //스킬정보창
@@ -161,17 +216,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Click_AP_Btn()
+    public void Test_Click()
     {
-        if(ap != 0)
-        {
-            ap--;
-            
-        }
 
-        string name = gameObject.name;
-        //string name = gameObject.transform.parent.gameObject.name;
-        Debug.Log(name);
+    }
+
+    public int Info()
+    {
+        return Ap_damage_plus;
     }
 
 }

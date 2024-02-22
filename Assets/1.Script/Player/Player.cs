@@ -70,30 +70,21 @@ public class Player : MonoBehaviour
         //몬스터에게 데미지를 입는 경우
         if(collision.gameObject.tag == "Enemy")
         {
-            GameManager.instance.player_Hp -= Time.deltaTime * collision.collider.GetComponent<Enemy>().damage;
+            GameManager.Instance.player_Hp -= Time.deltaTime * collision.collider.GetComponent<Enemy>().damage;
         }
         
     }
     
-    private void OnCollisionEnter2D(Collision2D collision) 
+    private void OnTriggerEnter2D(Collider2D collision) 
     {
+           //플레이어가 아이템을 먹을 경우
         if(collision.gameObject.tag == "Item")
         {
             Item item = collision.gameObject.GetComponent<Item>();
-            switch (item.data.itemType)
-            {
-                case ItemData.ItemType.Gold:
-                    //Debug.Log("골드 획득");
-                    GameManager.instance.gold++;
-                    break;
-            }
+            GameManager.Instance.GetItem(item);
             Destroy(collision.gameObject);
         } 
     }
-    /*
-    private void OnTriggerEnter2D(Collider2D collision) 
-    {
-           
-    }
-    */
+    
+    
 }

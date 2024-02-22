@@ -7,7 +7,7 @@ public class Weapon : MonoBehaviour
     public int wpID;
     public int prefabID;
     public int count;
-    public float damage;
+    public float Wp_damage; //무기의 기본 강화 상수
     public float speed;
 
     float timer;
@@ -45,7 +45,7 @@ public class Weapon : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Weapon_LevelUP(1);
+            Weapon_LevelUP(2);
             Debug.Log("레벨업");
         }
         
@@ -70,12 +70,14 @@ public class Weapon : MonoBehaviour
 
     public void Weapon_LevelUP(float damage)
     {
-        this.damage += damage;
+        this.Wp_damage += damage;
         //this.count += count;
 
 
     }
 
+
+    //근접용 무기
     void Batch()
     {
         for (int index = 0; index < count; index++)
@@ -87,7 +89,7 @@ public class Weapon : MonoBehaviour
             }
             else
             {
-                bullet = GameManager.instance.pool.Get_weapon(prefabID).transform;
+                bullet = GameManager.Instance.pool.Get_weapon(prefabID).transform;
                 bullet.parent = transform;
             }
 
@@ -97,7 +99,7 @@ public class Weapon : MonoBehaviour
             Vector3 roVec = Vector3.forward * 360 * index / count;
             bullet.Rotate(roVec);
             bullet.Translate(bullet.up * 1.5f, Space.World);
-            bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero); //-1은 무한 관통
+            bullet.GetComponent<Bullet>().Init(Wp_damage, -1, Vector3.zero); //-1은 무한 관통
         }
     }
 
@@ -112,12 +114,12 @@ public class Weapon : MonoBehaviour
         Vector3 dir = targetPos - transform.position;
         dir = dir.normalized;
 
-        Transform bullet = GameManager.instance.pool.Get_weapon(prefabID).transform;
+        Transform bullet = GameManager.Instance.pool.Get_weapon(prefabID).transform;
         bullet.parent = transform;
 
         bullet.position = transform.position;
         bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-        bullet.GetComponent<Bullet>().Init(damage, count, dir);
+        bullet.GetComponent<Bullet>().Init(Wp_damage, count, dir);
 
     }
 
