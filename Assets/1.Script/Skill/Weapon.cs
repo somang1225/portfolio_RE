@@ -99,7 +99,7 @@ public class Weapon : MonoBehaviour
             Vector3 roVec = Vector3.forward * 360 * index / count;
             bullet.Rotate(roVec);
             bullet.Translate(bullet.up * 1.5f, Space.World);
-            bullet.GetComponent<Bullet>().Init(Wp_damage, -1, Vector3.zero); //-1은 무한 관통
+            bullet.GetComponent<Bullet>().Init(Wp_damage, -100, Vector3.zero); //-1은 무한 관통
         }
     }
 

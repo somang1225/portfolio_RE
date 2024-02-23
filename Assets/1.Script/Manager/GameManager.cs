@@ -165,7 +165,16 @@ public class GameManager : MonoBehaviour
         {   //골드 먹을 경우
             case ItemData.ItemType.Gold:
                 //Debug.Log("골드 획득");
-                GameManager.Instance.gold++;
+                gold++;
+                break;
+            case ItemData.ItemType.Heal:
+                //물약 획득
+                player_Hp = player_Max_Hp;
+                break;
+
+            case ItemData.ItemType.Box:
+                //상자 획득
+                
                 break;
         }
     }
@@ -221,7 +230,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public int Info()
+    public int Test_Info()
     {
         return Ap_damage_plus;
     }

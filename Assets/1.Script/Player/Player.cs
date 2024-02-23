@@ -7,8 +7,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Vector2 inputVec;
-    public float speed = 5;
-    public Scanner scanner;
+    float speed = 5;
+    public Scanner scanner{get; private set;}
     public GameObject Shadow;
 
     Collider2D collider2D;

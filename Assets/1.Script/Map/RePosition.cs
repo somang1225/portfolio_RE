@@ -20,17 +20,21 @@ public class RePosition : MonoBehaviour
 
         Vector3 playerPos = GameManager.Instance.player.transform.position;
         Vector3 myPos = transform.position;
-
-        float disx = Mathf.Abs( playerPos.x - myPos.x ); 
-        float disy = Mathf.Abs( playerPos.y - myPos.y);
-
-        Vector3 playerDir = GameManager.Instance.player.inputVec;
-        float dirX = playerDir.x < 0 ? -1 : 1;
-        float dirY = playerDir.y < 0 ? -1 : 1;
+        
+        
 
         switch (transform.tag)
         {
             case "Ground":
+                float disx = playerPos.x - myPos.x;
+                float disy = playerPos.y - myPos.y;
+
+                float dirX = disx < 0 ? -1 : 1;
+                float dirY = disy < 0 ? -1 : 1;
+
+                disx = Mathf.Abs(disx);
+                disy = Mathf.Abs(disy);
+
                 if (disx > disy)
                 {
                     transform.Translate(Vector3.right * dirX * 40);
@@ -44,7 +48,19 @@ public class RePosition : MonoBehaviour
             case "Enemy":
                 if (collider2D.enabled)
                 {
-                    transform.Translate(playerDir * 20 + new Vector3 (Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0f));
+                    Vector3 dist = playerPos - myPos;
+                    Vector3 random = new Vector3(Random.Range(-3, 3), Random.Range(-3, 3));
+                    transform.Translate(random + dist * 2);
+                    //transform.Translate(playerDir * 20 + new Vector3 (Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0f));
+                }
+                break;
+
+            case "Item":
+                if (collider2D.enabled)
+                {
+                    Vector3 dist = playerPos - myPos;
+                    Vector3 random = new Vector3(Random.Range(-3, 3), Random.Range(-3, 3));
+                    transform.Translate(random + dist * 2);
                 }
                 break;
 
