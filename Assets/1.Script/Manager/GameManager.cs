@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
         ap_hp_plus = 10;
         ap_mp_plus = 10;
         maxplayTime = 60 * 1.5f;
-        max_kill_num = new int[] { 10, 10, 10, 30, 300, 500, 800, 1000 };
+        max_kill_num = new int[] { 5, 10, 15, 30, 3000, 500, 800, 1000 };
         nextExp = new int[] { 5, 10, 20, 20, 30, 50, 50, 60 } ; 
 }
 
@@ -132,8 +132,7 @@ public class GameManager : MonoBehaviour
             level++;
             ap+= 3;
 
-            Debug.Log("현재 레벨");
-            Debug.Log(level + 1);
+            //Debug.Log(level + 1);
 
             // 이후 HP, MP 초기화
             player_Hp = player_Max_Hp;
@@ -149,13 +148,14 @@ public class GameManager : MonoBehaviour
     public void GetKill()
     {
         kill_num++;
+
+        //스테이지 필요 몬스터 수 처치
         if (kill_num == max_kill_num[stage])
         {
             kill_num = 0;
+            playTime = 0;
             stage++;
-            Debug.Log("현재 스테이지" + stage);
-            
-
+            //Debug.Log("현재 스테이지" + stage);
         }
         
     }
@@ -228,11 +228,11 @@ public class GameManager : MonoBehaviour
     public void Test_Click()
     {
 
+
     }
 
     public int Test_Info()
     {
         return Ap_damage_plus;
     }
-
 }

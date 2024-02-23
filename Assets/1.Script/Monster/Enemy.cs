@@ -44,6 +44,18 @@ public class Enemy : MonoBehaviour //, IPoolObject
 
         rigidbody2D.MovePosition(rigidbody2D.position + nextVec);
         rigidbody2D.velocity = Vector2.zero;
+
+
+        //스테이지 변화
+        if(animator.runtimeAnimatorController != animCon[GameManager.Instance.stage])
+        {
+            isLive = false;
+            collider2D.enabled = false;
+            rigidbody2D.simulated = false;
+            spriteRenderer.sortingOrder = 1;
+            animator.SetBool("Dead", true);
+            
+        }
     }
 
     private void LateUpdate()
@@ -110,7 +122,7 @@ public class Enemy : MonoBehaviour //, IPoolObject
             spriteRenderer.sortingOrder = 1;
             animator.SetBool("Dead", true);
             GameManager.Instance.GetExp();
-            Vector3 deadPos = gameObject.transform.position;
+            
 
             //골드 드랍 100%
             Instantiate(itemGold, transform.position + new Vector3 (1, 0, 0), itemGold.transform.rotation);
