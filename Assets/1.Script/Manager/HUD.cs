@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HUD : MonoBehaviour
 {
     public enum InfoType {  Exp_bar, Level, Kill_bar, Kill_bar_text, Time, Hp_bar, Mp_bar, Ap, Power, Stage, Gold ,
-    AP_Damage, AP_Damage_Level, AP_HP, AP_HP_Level, AP_MP, AP_MP_Level}
+    AP_Damage, AP_Damage_Level, AP_HP, AP_HP_Level, AP_MP, AP_MP_Level, Ap_Speed, AP_Speed_Level}
 
     public InfoType type;
     Text mytext;
@@ -23,7 +23,8 @@ public class HUD : MonoBehaviour
         switch(type)
         {
             case InfoType.Exp_bar:
-                myslider.value = GameManager.Instance.HUD_Exp();
+                myslider.value = GameManager.Instance.HUD_Bar(GameManager.Instance.exp, 
+                GameManager.Instance.nextExp[GameManager.Instance.stage]);
                 break;
 
             case InfoType.Level:
@@ -39,13 +40,13 @@ public class HUD : MonoBehaviour
                 break;
 
             case InfoType.Kill_bar:
-                float cur_kill_num = GameManager.Instance.kill_num;
-                float max_kill_num = GameManager.Instance.max_kill_num[GameManager.Instance.stage];
-                myslider.value = cur_kill_num / max_kill_num;
+                myslider.value = GameManager.Instance.HUD_Bar(GameManager.Instance.kill_num, 
+                GameManager.Instance.max_kill_num[GameManager.Instance.stage]);
                 break;
 
             case InfoType.Kill_bar_text:
-                mytext.text = string.Format("{0} / {1}", GameManager.Instance.kill_num, GameManager.Instance.max_kill_num[GameManager.Instance.stage]);
+                mytext.text = string.Format("{0} / {1}", GameManager.Instance.kill_num, 
+                GameManager.Instance.max_kill_num[GameManager.Instance.stage]);
                 break;
 
             case InfoType.Time:
@@ -56,15 +57,11 @@ public class HUD : MonoBehaviour
                 break;
 
             case InfoType.Hp_bar:
-                float curHp = GameManager.Instance.player_Hp;
-                float maxHp = GameManager.Instance.player_Max_Hp;
-                myslider.value = curHp / maxHp;
+                myslider.value = GameManager.Instance.HUD_Bar(GameManager.Instance.player_Hp, GameManager.Instance.player_Max_Hp);
                 break;
 
             case InfoType.Mp_bar:
-                float curMp = GameManager.Instance.player_Mp;
-                float maxMp = GameManager.Instance.player_Max_Mp;
-                myslider.value = curMp / maxMp;
+                myslider.value = GameManager.Instance.HUD_Bar(GameManager.Instance.player_Mp, GameManager.Instance.player_Max_Mp);
                 break;
 
             case InfoType.Ap:
@@ -79,22 +76,36 @@ public class HUD : MonoBehaviour
                 mytext.text = string.Format("{0} -> {1}", GameManager.Instance.ap_damage, 
                     GameManager.Ap_damage_plus + GameManager.Instance.ap_damage);
                 break;
+
             case InfoType.AP_Damage_Level:
                 mytext.text = string.Format("Lv. {0}",GameManager.Instance.ap_damage_Level);
                 break;
+
             case InfoType.AP_HP:
                 mytext.text = string.Format("{0} -> {1}", GameManager.Instance.ap_hp, 
-                    GameManager.Instance.ap_hp_plus + GameManager.Instance.ap_hp);
+                    GameManager.Instance.ap_hmp_plus + GameManager.Instance.ap_hp);
                 break;
+
             case InfoType.AP_HP_Level:
                 mytext.text = string.Format("Lv. {0}",GameManager.Instance.ap_hp_Level);
                 break;
+
             case InfoType.AP_MP:
                 mytext.text = string.Format("{0} -> {1}", GameManager.Instance.ap_mp, 
-                    GameManager.Instance.ap_mp_plus + GameManager.Instance.ap_mp);
+                    GameManager.Instance.ap_hmp_plus + GameManager.Instance.ap_mp);
                 break;
+
             case InfoType.AP_MP_Level:
                 mytext.text = string.Format("Lv. {0}",GameManager.Instance.ap_mp_Level);
+                break;
+
+            case InfoType.Ap_Speed:
+               mytext.text = string.Format("{0:0.000} -> {1:0.000}", GameManager.Instance.ap_speed,
+                GameManager.Instance.ap_speed_plus + GameManager.Instance.ap_speed);
+                break;
+                
+            case InfoType.AP_Speed_Level:
+                mytext.text = string.Format("Lv. {0}",GameManager.Instance.ap_speed_Level);
                 break;
         }
     }

@@ -34,10 +34,10 @@ public class Spawner : MonoBehaviour
         if (timer > spawnDatas[stage_level] .monster_spawnTime)
         {
             timer = 0;
-
             Spawn();
-            
         }
+
+        
 
     }
 

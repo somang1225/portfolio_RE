@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ItemData : ScriptableObject
 {
+    //일단 임시로 카테고리 지정
     public enum ItemType {  Melee, Range, Glove, Shose, Heal, Gold, Box } //근접공격 / 원거리공격 / 장갑 / 신발 / 힐 / 골드
 
     //기본 데이터

@@ -51,7 +51,6 @@ public class RePosition : MonoBehaviour
                     Vector3 dist = playerPos - myPos;
                     Vector3 random = new Vector3(Random.Range(-3, 3), Random.Range(-3, 3));
                     transform.Translate(random + dist * 2);
-                    //transform.Translate(playerDir * 20 + new Vector3 (Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0f));
                 }
                 break;
 
@@ -66,4 +65,7 @@ public class RePosition : MonoBehaviour
 
         }
     }
+
+    
+
 }

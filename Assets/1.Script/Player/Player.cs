@@ -41,8 +41,8 @@ public class Player : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
-        Vector2 moveVec = inputVec.normalized * speed * Time.fixedDeltaTime;
+    {        
+        Vector2 moveVec = inputVec.normalized * Time.fixedDeltaTime * (speed + GameManager.Instance.ap_speed);
         rigidbody2D.MovePosition(rigidbody2D.position + moveVec);
     }
 

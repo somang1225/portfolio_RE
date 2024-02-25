@@ -23,19 +23,19 @@ public class GameManager : MonoBehaviour
     public int stage{get; private set;}
 
     [Header("Player Info")]
-    //게임 성장 관련 변수
-    [SerializeField] int exp;
-    [SerializeField] int[] nextExp = {  };  //임시용 경험치통
-    public int level{get; private set;}
-    public int kill_num{get; private set;}
-    public int[] max_kill_num = { }; //임시용 스테이지 클리어 몬스터 수
-    public int ap;
-    public int sp{get; private set;}
-    public int player_damage; //추가요소 : AP  //사용처 : 무기
     public float player_Hp;
     public float player_Max_Hp;
     public float player_Mp;
     public float player_Max_Mp;
+    //게임 성장 관련 변수
+    public int exp{get; private set;}
+    public int[] nextExp{get; private set;} = {  };  //임시용 경험치통
+    public int level{get; private set;}
+    public int kill_num{get; private set;}
+    public int[] max_kill_num{get; private set;} = { }; //임시용 스테이지 클리어 몬스터 수
+    public int ap;
+    public int sp{get; private set;}
+    public int player_damage; //추가요소 : AP  //사용처 : 무기
 
     [Header("AP Info")]
 
@@ -44,18 +44,23 @@ public class GameManager : MonoBehaviour
     public int ap_hp_Level;
     public int ap_mp_Level;
 
+    public int ap_speed_Level;
+
     //ap 능력치 증가량
     public int ap_damage;
     public int ap_hp;
     public int ap_mp;
 
-    //ap 증가 수치
+    public float ap_speed;
+
+    //ap 증가량 수치
     int ap_damage_plus;
     public static int Ap_damage_plus{get => Instance.ap_damage_plus; private set => Instance.ap_damage_plus = value; }
 
     //public int ap_damage_plus{get; private set;}
-    public int ap_hp_plus{get; private set;}
-    public int ap_mp_plus{get; private set;}
+    public int ap_hmp_plus{get; private set;}
+
+    public float ap_speed_plus{get; private set;}
 
 
 
@@ -92,8 +97,9 @@ public class GameManager : MonoBehaviour
         
         
         Ap_damage_plus = 3;
-        ap_hp_plus = 10;
-        ap_mp_plus = 10;
+        ap_hmp_plus = 10;
+        ap_speed_plus = 0.001f;
+
         maxplayTime = 60 * 1.5f;
         max_kill_num = new int[] { 5, 10, 15, 30, 3000, 500, 800, 1000 };
         nextExp = new int[] { 5, 10, 20, 20, 30, 50, 50, 60 } ; 
@@ -139,11 +145,12 @@ public class GameManager : MonoBehaviour
             player_Mp = player_Max_Mp;
         }
     }
-    public float HUD_Exp()
+    public float HUD_Bar(float cur, float cur_Max)
     {
-        float curExp = exp;
-        float curMaxExp = nextExp[level];
-        return curExp/curMaxExp;
+        float cur_bar = cur;
+        float curMax_bar = cur_Max;
+        //nextExp[level];
+        return cur_bar/curMax_bar;
     }
     public void GetKill()
     {
@@ -162,18 +169,20 @@ public class GameManager : MonoBehaviour
     public void GetItem(Item item)
     {
         switch (item.data.itemType)
-        {   //골드 먹을 경우
+        {   
+            //골드 먹을 경우
             case ItemData.ItemType.Gold:
-                //Debug.Log("골드 획득");
                 gold++;
                 break;
+
+            //물약 획득
             case ItemData.ItemType.Heal:
-                //물약 획득
                 player_Hp = player_Max_Hp;
                 break;
-
+                
+            //상자 획득
             case ItemData.ItemType.Box:
-                //상자 획득
+                
                 
                 break;
         }
