@@ -16,6 +16,8 @@ MonoBehaviour:
   itemID: 0
   itemName: 
   itemDesc: 
+  itemCount: 0
+  isUse: 0
   itemIcon: {fileID: 0}
   baseDamage: 0
   baseCount: 0

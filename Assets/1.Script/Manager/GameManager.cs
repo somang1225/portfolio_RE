@@ -179,7 +179,7 @@ public class GameManager : MonoBehaviour
             case ItemData.ItemType.Heal:
                 player_Hp = player_Max_Hp;
                 break;
-                
+
             //상자 획득
             case ItemData.ItemType.Box:
                 

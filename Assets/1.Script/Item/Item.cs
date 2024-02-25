@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,61 +10,66 @@ public class Item : MonoBehaviour
     public int weapon_level;
     public Weapon weapon;
 
+    
+
+    public GameObject[] slots;
+
     Image icon;
     Text text_Level;
+    Text text_Count;
+    Text text_Name;
+    Text text_Desc;
+
+
+
+    Text test_text;
     Collider2D collider2D;
     
 
     private void Awake()
     {
-        /*
+        
         icon = GetComponentsInChildren<Image>()[1];
         icon.sprite = data.itemIcon;
 
-        Text[] texts = GetComponentsInChildren<Text>();
-        text_Level = texts[0];
-        */
+        Text[] tests = GetComponentsInChildren<Text>();
+        
+        //text_Count = texts[0];
+        text_Count = tests[0];
+        
         collider2D = GetComponent<Collider2D>();
+    }
 
+    private void OnEnable() 
+    {
         
     }
 
-
-    /*
+    
     private void LateUpdate()
     {
-        text_Level.text = "Lv." + (weapon_level + 1);
+        //text.text = "Lv." + (weapon_level + 1);
+        text_Count.text = "1234";
     }
 
     
-    public void LevelUP_Click()
+    public void Get_EqItem()
     {
-        switch (data.itemType)
+        switch(data.itemType)
         {
-            case ItemData.ItemType.Melee:
-            case ItemData.ItemType.Range:
+            case ItemData.ItemType.Box:
 
-                break;
-
-            case ItemData.ItemType.Glove:
-                break;
-
-            case ItemData.ItemType.Shose:
-                break;
-
-            case ItemData.ItemType.Heal:
                 break;
         }
+    }
 
-        weapon_level++;
+    public void Tap_Click()
+    {
+        
 
-        if(weapon_level == data.damages.Length)
-        {
-            GetComponent<Button>().interactable = false;
-        }
 
     }
-    */
+    
 
 
     

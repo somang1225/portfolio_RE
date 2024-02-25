@@ -15,8 +15,15 @@ public class ItemData : ScriptableObject
     public ItemType itemType;
 
     public int itemID;
-    public string itemName;
-    public string itemDesc;
+    public string itemName; //아이템 이름
+    public string itemDesc; //아이템 설명
+    public int itemCount; //아이템 개수
+    public bool isUse; //아이템 사용 유무
+
+    public ItemData(int _itemID, string _itemName, string _itemDesc, int _itemCount, bool _isUse)
+    {
+        itemID = _itemID; itemName = _itemName; itemDesc = _itemDesc; itemCount = _itemCount; isUse = _isUse;
+    }
 
     public Sprite itemIcon;
 

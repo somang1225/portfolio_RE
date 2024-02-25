@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Health
   m_EditorClassIdentifier: 
   itemType: 4
-  itemID: 0
-  itemName: "\uACE8\uB4DC"
-  itemDesc: 
+  itemID: 12
+  itemName: "HP\uD68C\uBCF5 \uBB3C\uC57D"
+  itemDesc: "\uC57D\uCF00\uB9AD\uD130\uC758 \uCCB4\uB825\uC744 \uD68C\uBCF5\uD55C\uB2E4"
+  itemCount: 0
+  isUse: 0
   itemIcon: {fileID: 934571490, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
   baseDamage: 0
   baseCount: 0
