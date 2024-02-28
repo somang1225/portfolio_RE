@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
     public GameObject skill_Panel; //스킬 판넬
     public GameObject info_Panel; //인벤 판넬
     public GameObject reinfo_Pannel; //강화 판넬
-
+    public Inventory inventory;
     private void Awake()
     {
         if(instance == null)
@@ -168,6 +168,7 @@ public class GameManager : MonoBehaviour
     }
     public void GetItem(Item item)
     {
+
         switch (item.data.itemType)
         {   
             //골드 먹을 경우
@@ -181,9 +182,8 @@ public class GameManager : MonoBehaviour
                 break;
 
             //상자 획득
-            case ItemData.ItemType.Box:
-                
-                
+            case ItemData.ItemType.Box:                
+                inventory.AcquireItem(item.data);
                 break;
         }
     }

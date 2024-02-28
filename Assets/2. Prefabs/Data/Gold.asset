@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6b8b63f652246c8a365e4940fbb4b0, type: 3}
   m_Name: Gold
   m_EditorClassIdentifier: 
-  itemType: 5
+  itemType: 2
+  itemIcon: {fileID: 372016581, guid: 274d64617113287499ed1c4165d1d8f3, type: 3}
   itemID: 0
   itemName: "\uACE8\uB4DC"
   itemDesc: "\uAC8C\uC784 \uB0B4 \uAE30\uBCF8\uC801\uC778 \uC7AC\uD654"
   itemCount: 0
   isUse: 0
-  itemIcon: {fileID: 372016581, guid: 274d64617113287499ed1c4165d1d8f3, type: 3}
   baseDamage: 0
   baseCount: 0
   damages: []

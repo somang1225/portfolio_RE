@@ -192,6 +192,7 @@ MonoBehaviour:
   itemGold: {fileID: 6733471049663870367, guid: 04ad4f4d5d8a8445d8488c78868ecab9, type: 3}
   item_Hp: {fileID: 6733471049663870367, guid: bbfa035f0f5c04c03ba1610218c969a4, type: 3}
   item_weapon_box: {fileID: 6733471049663870367, guid: 8794a3660a1f94392805c532c153c5c2, type: 3}
+  item_: {fileID: 6733471049663870367, guid: 8794a3660a1f94392805c532c153c5c2, type: 3}
   target: {fileID: 0}
   animCon:
   - {fileID: 9100000, guid: f2855d618fc8d9c499189d3f39b9cbbc, type: 2}

@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
     public Vector2 inputVec;
     float speed = 5;
     public Scanner scanner{get; private set;}
@@ -81,8 +82,9 @@ public class Player : MonoBehaviour
         if(collision.gameObject.tag == "Item")
         {
             Item item = collision.gameObject.GetComponent<Item>();
+            //GameManager.Instance.inventory.AcquireItem(item);
             GameManager.Instance.GetItem(item);
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         } 
     }
     
