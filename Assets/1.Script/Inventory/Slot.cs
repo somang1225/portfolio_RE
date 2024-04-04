@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class Slot : MonoBehaviour
 
     [SerializeField]
     Text text_Count;
+
 
     //아이템 이미지 투명도 조절
     void SetColor(float _alpha)
@@ -23,14 +25,13 @@ public class Slot : MonoBehaviour
     //아이템 슬룻 추가
     public void AddItem(ItemData _item, int _count = 1)
     {
-        Debug.Log("아이템 추가");
         itemData = _item;
         itemData.itemCount = _count;
         item_Image.sprite = itemData.itemIcon;
 
         
 
-        if(itemData.itemType == ItemData.ItemType.Box)
+        if(itemData.itemType != ItemData.ItemType.Equipment)
         {
             text_Count.text = itemData.itemCount.ToString();
         } 
@@ -44,7 +45,6 @@ public class Slot : MonoBehaviour
 
     public void SetSlotCount(int _count)
     {
-        Debug.Log("카운터 추가");
         itemData.itemCount += _count;
         text_Count.text = itemData.itemCount.ToString();
 
@@ -56,12 +56,13 @@ public class Slot : MonoBehaviour
 
     void ClearSlot()
     {
-        itemData = null;
         itemData.itemCount = 0;
+        itemData = null;
         item_Image.sprite = null;
         SetColor(0);
-
-        text_Count.text = "0";
+        text_Count.text = "";
+        Destroy(gameObject);
+        //gameObject.SetActive(false);
     }
 
 
@@ -69,15 +70,15 @@ public class Slot : MonoBehaviour
     {
         switch(itemData.itemType)
         {
+            //Box using
             case ItemData.ItemType.Box:
-                itemData.itemCount--;
-                text_Count.text = itemData.itemCount.ToString();
-                if(itemData.itemCount <= 0)
-                {
-                    //gameObject.SetActive(false);
-                    itemData = null;
-                }
-                //GameManager.Instance.inventory.AcquireItem(itemData.eqItemType.);
+                SetSlotCount(-1); //개수 차감
+                
+                break;
+
+            case ItemData.ItemType.Heal:
+                SetSlotCount(-1); //개수 차감
+                
                 break;
         }
     }

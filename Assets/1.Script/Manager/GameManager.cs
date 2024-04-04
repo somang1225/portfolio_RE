@@ -166,7 +166,7 @@ public class GameManager : MonoBehaviour
         }
         
     }
-    public void GetItem(Item item)
+    public void GetItem(ItemManager item)
     {
 
         switch (item.data.itemType)
@@ -174,11 +174,13 @@ public class GameManager : MonoBehaviour
             //골드 먹을 경우
             case ItemData.ItemType.Gold:
                 gold++;
+                inventory.AcquireItem(item.data);
                 break;
 
             //물약 획득
             case ItemData.ItemType.Heal:
-                player_Hp = player_Max_Hp;
+                //player_Hp = player_Max_Hp;
+                inventory.AcquireItem(item.data);
                 break;
 
             //상자 획득

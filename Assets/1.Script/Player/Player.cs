@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
            //플레이어가 아이템을 먹을 경우
         if(collision.gameObject.tag == "Item")
         {
-            Item item = collision.gameObject.GetComponent<Item>();
+            ItemManager item = collision.gameObject.GetComponent<ItemManager>();
             //GameManager.Instance.inventory.AcquireItem(item);
             GameManager.Instance.GetItem(item);
             collision.gameObject.SetActive(false);
