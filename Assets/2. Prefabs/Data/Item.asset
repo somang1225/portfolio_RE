@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Item
   m_EditorClassIdentifier: 
   itemType: 0
-  itemIcon: {fileID: -1972582131, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  itemIcon: {fileID: 0}
   itemID: 0
   itemName: 
   itemDesc: 
@@ -24,3 +24,6 @@ MonoBehaviour:
   damages: []
   counts: 
   projectile: {fileID: 0}
+  eq_defense: 0
+  eq_speed: 0
+  eq_power: 0

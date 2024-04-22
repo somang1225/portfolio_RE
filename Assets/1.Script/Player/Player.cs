@@ -71,10 +71,22 @@ public class Player : MonoBehaviour
         //몬스터에게 데미지를 입는 경우
         if(collision.gameObject.tag == "Enemy")
         {
-            GameManager.Instance.player_Hp -= Time.deltaTime * collision.collider.GetComponent<Enemy>().damage;
+            float curdamage = GameManager.Instance.eq_defense-collision.collider.GetComponent<Enemy>().damage;
+            //데미지가 양수일 경우만 데미지 적용
+            if(curdamage > 0)
+            {
+                GameManager.Instance.player_Hp -= Time.deltaTime * curdamage;
+            }
+            else
+            {
+                GameManager.Instance.player_Hp -= Time.deltaTime * 0.01f;
+            }
+            
+            
         }
         
     }
+    
     
     private void OnTriggerEnter2D(Collider2D collision) 
     {

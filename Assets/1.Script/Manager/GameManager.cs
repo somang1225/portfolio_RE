@@ -37,6 +37,12 @@ public class GameManager : MonoBehaviour
     public int sp{get; private set;}
     public int player_damage; //추가요소 : AP  //사용처 : 무기
 
+    [Header("player Eq")]
+    public int eq_defense;
+    public int eq_speed;
+    public int eq_power;
+
+
     [Header("AP Info")]
 
     //ap 능력치 레벨
@@ -174,7 +180,7 @@ public class GameManager : MonoBehaviour
             //골드 먹을 경우
             case ItemData.ItemType.Gold:
                 gold++;
-                inventory.AcquireItem(item.data);
+                //inventory.AcquireItem(item.data);
                 break;
 
             //물약 획득
@@ -187,6 +193,7 @@ public class GameManager : MonoBehaviour
             case ItemData.ItemType.Box:                
                 inventory.AcquireItem(item.data);
                 break;
+                  
         }
     }
 

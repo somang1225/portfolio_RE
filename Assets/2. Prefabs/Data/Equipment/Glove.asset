@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6b8b63f652246c8a365e4940fbb4b0, type: 3}
+  m_Name: Glove
+  m_EditorClassIdentifier: 
+  itemType: 0
+  itemIcon: {fileID: 21300000, guid: d7236dfb0d0b195439305df676f2425b, type: 3}
+  itemID: 301
+  itemName: 
+  itemDesc: 
+  itemCount: 1
+  isUse: 0
+  baseDamage: 0
+  baseCount: 0
+  damages: []
+  counts: 
+  projectile: {fileID: 0}
+  eq_defense: 0
+  eq_speed: 0
+  eq_power: 0

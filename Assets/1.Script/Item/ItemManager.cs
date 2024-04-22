@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class ItemManager : MonoBehaviour
 {
     public ItemData data;
+
+    public ItemData[] Eqitem_data;
+
     public int weapon_level;
     public Weapon weapon;
     Collider2D collider2D;
