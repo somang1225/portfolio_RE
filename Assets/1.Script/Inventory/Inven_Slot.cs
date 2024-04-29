@@ -37,7 +37,7 @@ public class Inven_Slot : MonoBehaviour
         } 
         else
         {
-            text_Count.text = "0";
+            text_Count.text = " ";
         }
 
         SetColor(1);
@@ -72,8 +72,9 @@ public class Inven_Slot : MonoBehaviour
         {
             //Box using
             case ItemData.ItemType.Box:
+
+                GameManager.Instance.inventory.AcquireItem(itemData.eqitem_data[0]);
                 SetSlotCount(-1); //개수 차감
-                
                 
                 break;
 

@@ -55,6 +55,7 @@ public class Inventory : MonoBehaviour
                         }
                     }
                 }
+                //슬룻이 있으나 중복된게 없을 경우
                 Instantiate(slot, go_SlotsParent.transform);
                 inven_Slots = go_SlotsParent.GetComponentsInChildren<Inven_Slot>();
             }

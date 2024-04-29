@@ -31,12 +31,10 @@ public class ItemData : ScriptableObject
 
 
     //특수한 무기 관련 데이터
-    [Header("Weapon")]
-    public GameObject projectile;
-
-
     [Header("Equipment")]
-    
+    public GameObject equipment;
+    public ItemData[] eqitem_data;
+
 
     public int eq_defense;
     public int eq_speed;

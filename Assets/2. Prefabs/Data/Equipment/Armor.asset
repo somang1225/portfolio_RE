@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Armor
   m_EditorClassIdentifier: 
   itemType: 0
-  itemIcon: {fileID: 21300000, guid: d7236dfb0d0b195439305df676f2425b, type: 3}
+  itemIcon: {fileID: 21300000, guid: 5105fe1d825990746b9a92407ea447ca, type: 3}
   itemID: 301
-  itemName: 
+  itemName: armor
   itemDesc: 
   itemCount: 1
   isUse: 0
@@ -23,7 +23,8 @@ MonoBehaviour:
   baseCount: 0
   damages: []
   counts: 
-  projectile: {fileID: 0}
+  equipment: {fileID: 0}
+  eqitem_data: []
   eq_defense: 0
   eq_speed: 0
   eq_power: 0

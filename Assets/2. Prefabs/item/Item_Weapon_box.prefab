@@ -167,6 +167,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: be6f55b5880a04547b0335df03267ae9, type: 2}
+  Eqitem_data:
+  - {fileID: 11400000, guid: 458dad2e87cb04a008cf5d288928749a, type: 2}
+  - {fileID: 11400000, guid: d416ca1114110472f9018deb29030447, type: 2}
+  - {fileID: 11400000, guid: 05e8c5caa7f8e446ab0f154afff0e509, type: 2}
+  - {fileID: 11400000, guid: 72aea69c6c6fc41d2afffe4c75741191, type: 2}
   weapon_level: 0
   weapon: {fileID: 0}
 --- !u!114 &-3239331163100457351

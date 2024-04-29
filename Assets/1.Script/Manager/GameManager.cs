@@ -193,7 +193,10 @@ public class GameManager : MonoBehaviour
             case ItemData.ItemType.Box:                
                 inventory.AcquireItem(item.data);
                 break;
-                  
+            
+            case ItemData.ItemType.Equipment:
+                //inventory.AcquireItem(item.data.);
+                break;
         }
     }
 
@@ -242,6 +245,8 @@ public class GameManager : MonoBehaviour
             info_Panel.SetActive(false);
         }
     }
+
+
 
     public void Test_Click()
     {
