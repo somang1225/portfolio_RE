@@ -72,8 +72,8 @@ public class Inven_Slot : MonoBehaviour
         {
             //Box using
             case ItemData.ItemType.Box:
-
-                GameManager.Instance.inventory.AcquireItem(itemData.eqitem_data[0]);
+                int item_ran = Random.Range(0, 4); /* 0:Helmet 1:Armor 2:Glove 3:Boot */
+                GameManager.Instance.inventory.AcquireItem(itemData.eqitem_data[item_ran]);
                 SetSlotCount(-1); //개수 차감
                 
                 break;
@@ -83,7 +83,11 @@ public class Inven_Slot : MonoBehaviour
                 break;
 
             case ItemData.ItemType.Equipment:
-                
+                if(itemData.isUse == false)
+                {
+                    GameManager.Instance.inventory.using_EQ(itemData);
+                    SetSlotCount(-1); //개수 차감
+                }
                 break;    
         }
     }

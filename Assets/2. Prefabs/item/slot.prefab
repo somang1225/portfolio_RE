@@ -78,7 +78,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\u3141\u3134\u3147\u3141\u3134\u3147\u3141"
+  m_Text: 
 --- !u!1 &5196833464378121433
 GameObject:
   m_ObjectHideFlags: 0

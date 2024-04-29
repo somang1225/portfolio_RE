@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
     private void Start() 
     {
         inven_Slots = go_SlotsParent.GetComponentsInChildren<Inven_Slot>();
-        //eq_Slots = eq_slotsParent.GetComponentInChildren<Inven_Slot>();
+        eq_Slots = eq_slotsParent.GetComponentsInChildren<Inven_Slot>();
     }
 
 
@@ -79,6 +79,24 @@ public class Inventory : MonoBehaviour
         
     }
 
+    public void using_EQ(ItemData _itemdata)
+    {
+        switch(_itemdata.itemID / 100)
+        {
+            case 1:
+                eq_Slots[0].AddItem(_itemdata,1);
+            break;
+            case 2:
+                eq_Slots[1].AddItem(_itemdata,1);
+                break;
+            case 3:
+                eq_Slots[2].AddItem(_itemdata,1);
+                break;
+            case 4:
+                eq_Slots[3].AddItem(_itemdata, 1);
+                break;    
+        }
+    }
 
     //텝 클릭
     public void TabClick(ItemData itemData)

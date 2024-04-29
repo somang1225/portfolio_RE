@@ -23,7 +23,8 @@ MonoBehaviour:
   baseCount: 0
   damages: []
   counts: 
-  projectile: {fileID: 0}
+  equipment: {fileID: 0}
+  eqitem_data: []
   eq_defense: 0
   eq_speed: 0
   eq_power: 0
