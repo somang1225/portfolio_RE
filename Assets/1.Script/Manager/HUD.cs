@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class HUD : MonoBehaviour
 {
     public enum InfoType {  Exp_bar, Level, Kill_bar, Kill_bar_text, Time, Hp_bar, Mp_bar, Ap, Power, Stage, Gold ,
-    AP_Damage, AP_Damage_Level, AP_HP, AP_HP_Level, AP_MP, AP_MP_Level, Ap_Speed, AP_Speed_Level}
+    AP_Damage, AP_Damage_Level, AP_HP, AP_HP_Level, AP_MP, AP_MP_Level, Ap_Speed, AP_Speed_Level,
+    Eq_Defense, Eq_Speed, EqPower}
 
     public InfoType type;
     Text mytext;
@@ -107,6 +108,16 @@ public class HUD : MonoBehaviour
             case InfoType.AP_Speed_Level:
                 mytext.text = string.Format("Lv. {0}",GameManager.Instance.ap_speed_Level);
                 break;
+
+            case InfoType.EqPower:
+                mytext.text = string.Format("장비 공격력 {0}",GameManager.Instance.eq_power);
+                break;
+            case InfoType.Eq_Defense:
+                mytext.text = string.Format("장비 방어력 {0}",GameManager.Instance.eq_defense);
+                break;
+            case InfoType.Eq_Speed:
+                mytext.text = string.Format("장비 이동속도 {0}",GameManager.Instance.eq_speed);
+                break;    
         }
     }
 

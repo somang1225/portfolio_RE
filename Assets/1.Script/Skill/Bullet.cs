@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
     public void Init(float pre_damage, int per, Vector3 dir)
     {
         //pre = 무기상수 // 무기 데미지 = 무기상수 + 케릭터 데미지 강화
-        this.damage = pre_damage + GameManager.Instance.player_damage;
+        this.damage = pre_damage + GameManager.Instance.player_damage + GameManager.Instance.eq_power;
         this.per = per;
 
         if(per >= 0)
@@ -36,6 +36,8 @@ public class Bullet : MonoBehaviour
         }
 
         per -- ;
+        Debug.Log("데미지");
+        Debug.Log(this.damage);
 
         if (per < 0)
         {

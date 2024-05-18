@@ -225,6 +225,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad7ecbb14a6944564b462a14fb7ad88e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  solt_eq_defense: 0
+  solt_eq_speed: 0
+  solt_eq_power: 0
   itemData: {fileID: 0}
   item_Image: {fileID: 8808434847059755885}
   text_Count: {fileID: 4949565397874529587}

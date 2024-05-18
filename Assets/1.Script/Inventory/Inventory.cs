@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
     GameObject go_SlotsParent; //Slot 부모인 Grid Setting
     
     [SerializeField]
-    GameObject eq_slotsParent;
+    GameObject go_EqSlotsParent;
 
     [SerializeField]
     GameObject slot;
@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
     private void Start() 
     {
         inven_Slots = go_SlotsParent.GetComponentsInChildren<Inven_Slot>();
-        eq_Slots = eq_slotsParent.GetComponentsInChildren<Inven_Slot>();
+        eq_Slots = go_EqSlotsParent.GetComponentsInChildren<Inven_Slot>();
     }
 
 
@@ -38,7 +38,7 @@ public class Inventory : MonoBehaviour
             if(inven_Slots.Length == 0)
             {
                 Instantiate(slot, go_SlotsParent.transform);
-                inven_Slots = go_SlotsParent.GetComponentsInChildren<Inven_Slot>();
+                inven_Slots = go_SlotsParent.GetComponentsInChildren<Inven_Slot>(true);
             }
             else //슬룻이 있으니 아이템의 존재유무 파악            
             {
@@ -57,13 +57,13 @@ public class Inventory : MonoBehaviour
                 }
                 //슬룻이 있으나 중복된게 없을 경우
                 Instantiate(slot, go_SlotsParent.transform);
-                inven_Slots = go_SlotsParent.GetComponentsInChildren<Inven_Slot>();
+                inven_Slots = go_SlotsParent.GetComponentsInChildren<Inven_Slot>(true);
             }
         }
         else
         {
             Instantiate(slot, go_SlotsParent.transform);
-            inven_Slots = go_SlotsParent.GetComponentsInChildren<Inven_Slot>();
+            inven_Slots = go_SlotsParent.GetComponentsInChildren<Inven_Slot>(true);
         }
         
         //일단 작동용 (추후 생성된 슬룻에만 적용하게 변경)
@@ -79,31 +79,68 @@ public class Inventory : MonoBehaviour
         
     }
 
-    public void using_EQ(ItemData _itemdata)
-    {
+    public void using_EQ(ItemData _itemdata, GameObject gameObject)  /* 0:Helmet 1:Armor 2:Glove 3:Boot */
+    {   
+        int slotnum = (_itemdata.itemID / 100) -1;
+        
+        if(eq_Slots[slotnum].itemData != null)
+        {
+            Debug.Log("이미 장착한 장비가 존재합니다");
+            
+            
+            AcquireItem(_itemdata);
+        }
+        
+
+        //일단 장비창에 장비를 장착하도록 설정
         switch(_itemdata.itemID / 100)
         {
             case 1:
-                eq_Slots[0].AddItem(_itemdata,1);
+                eq_Slots[slotnum].AddItem(_itemdata);
+
             break;
             case 2:
-                eq_Slots[1].AddItem(_itemdata,1);
+                eq_Slots[slotnum].AddItem(_itemdata);
                 break;
             case 3:
-                eq_Slots[2].AddItem(_itemdata,1);
+                eq_Slots[slotnum].AddItem(_itemdata);
                 break;
             case 4:
-                eq_Slots[3].AddItem(_itemdata, 1);
-                break;    
+                eq_Slots[slotnum].AddItem(_itemdata);
+                break;
         }
+
+        int eq_defense = 0;
+        int eq_power = 0;
+        int eq_speed = 0;
+
+        for (int i = 0; i < eq_Slots.Length; i++)
+        {
+            eq_defense += eq_Slots[i].solt_eq_defense;
+            eq_power += eq_Slots[i].solt_eq_power;
+            eq_speed += eq_Slots[i].solt_eq_speed;           
+        }
+
+        GameManager.Instance.eq_defense = eq_defense;
+        GameManager.Instance.eq_power = eq_power;
+        GameManager.Instance.eq_speed = eq_speed;
+
     }
 
-    //텝 클릭
-    public void TabClick(ItemData itemData)
+
+ //텝 클릭
+    public void TabClick(ItemData Data)
     {
         for (int i = 0; i < inven_Slots.Length; i++)
         {
-            //slots[i].SetA
+            if(inven_Slots[i].itemData.itemType == Data.itemType)
+            {
+                inven_Slots[i].enabled = true;
+            }
+            else
+            {
+                inven_Slots[i].enabled = false;
+            }
         }
     }
 

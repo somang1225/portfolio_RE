@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
         //몬스터에게 데미지를 입는 경우
         if(collision.gameObject.tag == "Enemy")
         {
-            float curdamage = GameManager.Instance.eq_defense-collision.collider.GetComponent<Enemy>().damage;
+            float curdamage = collision.collider.GetComponent<Enemy>().damage - GameManager.Instance.eq_defense;
             //데미지가 양수일 경우만 데미지 적용
             if(curdamage > 0)
             {

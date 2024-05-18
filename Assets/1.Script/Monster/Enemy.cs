@@ -102,7 +102,11 @@ public class Enemy : MonoBehaviour //, IPoolObject
             return;
         }
 
+        
+        
         hp -= collision.GetComponent<Bullet>().damage;
+
+
         //Debug.Log(collision.GetComponent<Bullet>().damage);
 
         StartCoroutine(KnockBack());
@@ -170,6 +174,26 @@ public class Enemy : MonoBehaviour //, IPoolObject
         GameObject dropItem = GameManager.Instance.pool.Get_item(index);
         dropItem.transform.position = gameObject.transform.position;
 
+    }
+
+    public void TakeDamage(int damage, DamageType type)
+    {
+        GameObject hudText = Instantiate(hudDamageText);
+        hudText.GetComponent<HudDamageText>().damage = damage;
+        hudText.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, -0.5f);
+
+        switch (type) //데미지 타입에 따라 글자 색깔을 변경하고 싶을때
+        {
+            case DamageType.One:
+                hudText.GetComponent<HudText>().damage = "<color=red>" + damage + "</color>";
+                break;
+            case DamageType.Two:
+                hudText.GetComponent<HudText>().damage = "<color=green>" + damage + "</color>";
+                break;
+            case DamageType.Three:
+                hudText.GetComponent<HudText>().damage = "<color=blue>" + damage + "</color>";
+                break;
+        }
     }
 
 }

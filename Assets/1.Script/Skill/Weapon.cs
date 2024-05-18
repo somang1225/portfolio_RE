@@ -46,7 +46,7 @@ public class Weapon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Weapon_LevelUP(2);
-            Debug.Log("레벨업");
+            //Debug.Log("레벨업");
         }
         
     }
