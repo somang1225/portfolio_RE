@@ -36,8 +36,6 @@ public class Bullet : MonoBehaviour
         }
 
         per -- ;
-        Debug.Log("데미지");
-        Debug.Log(this.damage);
 
         if (per < 0)
         {

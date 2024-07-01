@@ -12,11 +12,17 @@ public class Inven_Slot : MonoBehaviour
     public int solt_eq_speed;
     public int solt_eq_power;
 
+    public bool isusing;
+    public GameObject usingEq;
+
     public ItemData itemData; //획득한 아이템 정보
     public Image item_Image;
 
     [SerializeField]
     Text text_Count;
+    
+
+
 
 
     //아이템 이미지 투명도 조절
@@ -61,7 +67,12 @@ public class Inven_Slot : MonoBehaviour
 
         if(itemData.itemCount <= 0)
         {
-            ClearSlot();
+            //ClearSlot();
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(true);
         }
     }
 
@@ -69,10 +80,11 @@ public class Inven_Slot : MonoBehaviour
     {
         itemData.itemCount = 0;
         itemData = null;
-        item_Image.sprite = null;
+        usingEq = null;
+        //item_Image.sprite = null;
         SetColor(0);
         text_Count.text = "";
-        Destroy(gameObject);
+        //Destroy(gameObject);
         //gameObject.SetActive(false);
     }
 
@@ -85,24 +97,44 @@ public class Inven_Slot : MonoBehaviour
             case ItemData.ItemType.Box:
                 int item_ran = Random.Range(0, 4); /* 0:Helmet 1:Armor 2:Glove 3:Boot */
                 
-                //GameManager.Instance.inventory.AcquireItem(itemData.eqitem_data_rare[item_ran]);
-                
-                GameManager.Instance.inventory.AcquireItem(itemData.eqitem_data_nomal[item_ran]);
+                GameManager.Instance.inventory.AcquireItem(itemData.eqitem_data[item_ran]);
                 SetSlotCount(-1); //개수 차감
                 
                 break;
 
             case ItemData.ItemType.Heal:
                 SetSlotCount(-1); //개수 차감
+                GameManager.Instance.player_Hp = GameManager.Instance.player_Max_Hp;
                 break;
 
             case ItemData.ItemType.Equipment:
-
-                    GameManager.Instance.inventory.using_EQ(itemData, gameObject);
-                    SetSlotCount(-1); //개수 차감
+                    //GameManager.Instance.inventory.using_EQ(itemData, gameObject);
+                    GameManager.Instance.inventory.Info_Slot(gameObject);
+                    
                 
                 break;    
         }
     }
+
+    public void Click_EQ_Slot()
+    {
+        if(usingEq == null)
+        {
+            return;
+        }
+
+        Inven_Slot temp_item;
+
+        temp_item = usingEq.GetComponent<Inven_Slot>();
+
+        temp_item.isusing = false;
+        usingEq.SetActive(true);
+
+        ClearSlot();
+
+    }
+
+
+
 
 }

@@ -36,6 +36,10 @@ public class Enemy : MonoBehaviour //, IPoolObject
 
     private void FixedUpdate()
     {
+        if(!GameManager.Instance.isLive)
+        {
+            return;
+        }
         if (!isLive || animator.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
             return;
 
@@ -60,6 +64,10 @@ public class Enemy : MonoBehaviour //, IPoolObject
 
     private void LateUpdate()
     {
+        if(!GameManager.Instance.isLive)
+        {
+            return;
+        }
         if (target.position.x < rigidbody2D.position.x)
         {
             spriteRenderer.flipX = true;
@@ -140,6 +148,7 @@ public class Enemy : MonoBehaviour //, IPoolObject
             }
             else if (item_ran < 9) //장비 아이템 획득 70%
             {
+
                 //Instantiate(item_, transform.position, item_.transform.rotation);
                 DropItem(2);
             }
@@ -172,28 +181,15 @@ public class Enemy : MonoBehaviour //, IPoolObject
     void DropItem(int index)
     {
         GameObject dropItem = GameManager.Instance.pool.Get_item(index);
+
+        if(index ==2)
+        {
+            dropItem.GetComponent<SpriteRenderer>().sprite = dropItem.GetComponent<ItemManager>().eqBox_Data[3];
+        }
+
         dropItem.transform.position = gameObject.transform.position;
 
     }
 
-    public void TakeDamage(int damage, DamageType type)
-    {
-        GameObject hudText = Instantiate(hudDamageText);
-        hudText.GetComponent<HudDamageText>().damage = damage;
-        hudText.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, -0.5f);
-
-        switch (type) //데미지 타입에 따라 글자 색깔을 변경하고 싶을때
-        {
-            case DamageType.One:
-                hudText.GetComponent<HudText>().damage = "<color=red>" + damage + "</color>";
-                break;
-            case DamageType.Two:
-                hudText.GetComponent<HudText>().damage = "<color=green>" + damage + "</color>";
-                break;
-            case DamageType.Three:
-                hudText.GetComponent<HudText>().damage = "<color=blue>" + damage + "</color>";
-                break;
-        }
-    }
 
 }

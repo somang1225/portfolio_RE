@@ -29,26 +29,33 @@ public class Player : MonoBehaviour
         scanner = GetComponent<Scanner>();
     }
 
-    void Start()
-    {
-        
-    }
-
 
     void Update()
     {
+        if(!GameManager.Instance.isLive)
+        {
+            return;
+        }
         inputVec.x = Input.GetAxisRaw("Horizontal");
         inputVec.y = Input.GetAxisRaw("Vertical");
     }
 
     private void FixedUpdate()
     {        
+        if(!GameManager.Instance.isLive)
+        {
+            return;
+        }
         Vector2 moveVec = inputVec.normalized * Time.fixedDeltaTime * (speed + GameManager.Instance.ap_speed);
         rigidbody2D.MovePosition(rigidbody2D.position + moveVec);
     }
 
     private void LateUpdate()
     {
+        if(!GameManager.Instance.isLive)
+        {
+            return;
+        }
 
         //이동하는 동안 케릭터의 좌우 모션
         if (inputVec.x < 0)

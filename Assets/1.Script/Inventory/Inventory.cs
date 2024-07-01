@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -10,6 +12,9 @@ public class Inventory : MonoBehaviour
 
     [SerializeField]
     GameObject go_SlotsParent; //Slot 부모인 Grid Setting
+
+    [SerializeField]
+    GameObject go_tab_bottens;
     
     [SerializeField]
     GameObject go_EqSlotsParent;
@@ -17,14 +22,32 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     GameObject slot;
 
-    Inven_Slot[] inven_Slots; //슬룻 배열
-    Inven_Slot[] eq_Slots; //장착 슬룻 배열
+    [SerializeField]
+    GameObject item_Info_Parent;
     
+    
+    public ItemData tapDataType;
+
+    
+
+    Inven_Slot[] inven_Slots; //슬룻 배열
+    Inven_Slot[] eq_Slots; //장착 슬룻 배열 
+    Inven_Slot info_Slot; //정보창에 표기될 아이템 슬릇
+
+
+    Color click_tab;
+    Color nonclick_tab;
 
     private void Start() 
     {
-        inven_Slots = go_SlotsParent.GetComponentsInChildren<Inven_Slot>();
-        eq_Slots = go_EqSlotsParent.GetComponentsInChildren<Inven_Slot>();
+        inven_Slots = go_SlotsParent.GetComponentsInChildren<Inven_Slot>(true);
+        eq_Slots = go_EqSlotsParent.GetComponentsInChildren<Inven_Slot>(true);
+        info_Slot = item_Info_Parent.GetComponentInChildren<Inven_Slot>(true);
+
+        tapDataType.itemType = ItemData.ItemType.Equipment;
+
+        UnityEngine.ColorUtility.TryParseHtmlString("#809A9D", out click_tab);
+        UnityEngine.ColorUtility.TryParseHtmlString("#E7E7E7", out nonclick_tab);
     }
 
 
@@ -60,7 +83,7 @@ public class Inventory : MonoBehaviour
                 inven_Slots = go_SlotsParent.GetComponentsInChildren<Inven_Slot>(true);
             }
         }
-        else
+        else //장비일 경우
         {
             Instantiate(slot, go_SlotsParent.transform);
             inven_Slots = go_SlotsParent.GetComponentsInChildren<Inven_Slot>(true);
@@ -71,25 +94,42 @@ public class Inventory : MonoBehaviour
         {
             if(inven_Slots[i-1].itemData == null)
             {
-                Debug.Log("슬룻 생성");
+                
                 inven_Slots[i-1].AddItem(_itemdata, _count);
+
+                if(inven_Slots[i-1].itemData.itemType != tapDataType.itemType)
+                {
+                    inven_Slots[i-1].gameObject.SetActive(false);
+                }
+
+
                 return;
             }
         }
         
     }
 
-    public void using_EQ(ItemData _itemdata, GameObject gameObject)  /* 0:Helmet 1:Armor 2:Glove 3:Boot */
+    public void using_EQ(ItemData _itemdata, GameObject click_gameObject)  /* 0:Helmet 1:Armor 2:Glove 3:Boot */
     {   
-        int slotnum = (_itemdata.itemID / 100) -1;
+        int slotnum = (_itemdata.itemID / 100) -1; //장착 아이템의 자리 찾기
         
+        //이미 장착한 장비가 있을 경우
         if(eq_Slots[slotnum].itemData != null)
         {
             Debug.Log("이미 장착한 장비가 존재합니다");
             
-            
-            AcquireItem(_itemdata);
+            //기존에 착용한 장비의 사용중을 false로 수정
+            eq_Slots[slotnum].usingEq.GetComponent<Inven_Slot>().isusing = false;
+            eq_Slots[slotnum].usingEq.SetActive(true);
+
+            //AcquireItem(_itemdata);
         }
+        
+
+        eq_Slots[slotnum].itemData = _itemdata;
+        eq_Slots[slotnum].usingEq = click_gameObject;
+
+
         
 
         //일단 장비창에 장비를 장착하도록 설정
@@ -97,14 +137,16 @@ public class Inventory : MonoBehaviour
         {
             case 1:
                 eq_Slots[slotnum].AddItem(_itemdata);
+                break;
 
-            break;
             case 2:
                 eq_Slots[slotnum].AddItem(_itemdata);
                 break;
+
             case 3:
                 eq_Slots[slotnum].AddItem(_itemdata);
                 break;
+                
             case 4:
                 eq_Slots[slotnum].AddItem(_itemdata);
                 break;
@@ -125,23 +167,86 @@ public class Inventory : MonoBehaviour
         GameManager.Instance.eq_power = eq_power;
         GameManager.Instance.eq_speed = eq_speed;
 
+        click_gameObject.GetComponent<Inven_Slot>().isusing = true;
+
+        click_gameObject.SetActive(false);
+
     }
 
 
  //텝 클릭
-    public void TabClick(ItemData Data)
+    public void TabClick(ItemData clickData)
     {
-        for (int i = 0; i < inven_Slots.Length; i++)
+        int tabnum = 0;
+
+        if(tapDataType.itemType != clickData.itemType)
         {
-            if(inven_Slots[i].itemData.itemType == Data.itemType)
+            tapDataType.itemType = clickData.itemType;
+        }
+
+        switch (tapDataType.itemType)
+        {
+            case ItemData.ItemType.Equipment:
+                tabnum = 0;
+                break;
+
+            case ItemData.ItemType.Box:
+                tabnum = 1;
+                break;
+
+            case ItemData.ItemType.Heal:
+                tabnum = 2;
+                break;
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            go_tab_bottens.transform.GetChild(i).GetComponent<Image>().color = i == tabnum ? click_tab:nonclick_tab;
+        }
+
+        for (int i = 0; i < inven_Slots.Length; i++)
+        {   
+            
+            //슬릇의 아이템 타입과 텝의 아이템 타입 일치 && 사용중X
+            if(go_SlotsParent.transform.GetChild(i).GetComponent<Inven_Slot>().itemData.itemType == tapDataType.itemType && go_SlotsParent.transform.GetChild(i).GetComponent<Inven_Slot>().isusing == false)
             {
-                inven_Slots[i].enabled = true;
+                //아이템의 개수가 0이상이야 보인다
+                if(inven_Slots[i].itemData.itemCount > 0)
+                {
+                    go_SlotsParent.transform.GetChild(i).gameObject.SetActive(true);
+                }
             }
-            else
+            else if(inven_Slots[i].itemData.itemType != tapDataType.itemType)
             {
-                inven_Slots[i].enabled = false;
+                inven_Slots[i].gameObject.SetActive(false);
             }
         }
     }
 
+
+    public void Info_Slot(GameObject clickItem)
+    {
+        item_Info_Parent.SetActive(true);
+        item_Info_Parent.GetComponent<Inventory_info>().info_Item = clickItem;
+        item_Info_Parent.GetComponent<Inventory_info>().WakeUP();
+        Inven_Slot clickitem = clickItem.GetComponent<Inven_Slot>();
+
+        //정보창에 아이템 등록
+        info_Slot.itemData = clickitem.itemData;
+        info_Slot.AddItem(clickitem.itemData, 1);
+
+        switch (info_Slot.itemData.itemType)
+        {
+            case ItemData.ItemType.Equipment:
+                Debug.Log("장비 아이템 선택");
+                break;
+        }
+    }
+
+    
+
+
+
+
 }
+

@@ -228,6 +228,8 @@ MonoBehaviour:
   solt_eq_defense: 0
   solt_eq_speed: 0
   solt_eq_power: 0
+  isusing: 0
+  usingEq: {fileID: 0}
   itemData: {fileID: 0}
   item_Image: {fileID: 8808434847059755885}
   text_Count: {fileID: 4949565397874529587}

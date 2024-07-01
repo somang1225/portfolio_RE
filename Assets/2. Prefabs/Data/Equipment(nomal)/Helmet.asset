@@ -23,8 +23,7 @@ MonoBehaviour:
   baseCount: 0
   damages: []
   counts: 
-  eqitem_data_nomal: []
-  eqitem_data_rare: []
+  eqitem_data: []
   eq_defense: 1
   eq_speed: 0
   eq_power: 0

@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public float maxplayTime{get; private set;}
     public int stage{get; private set;}
 
+    public bool isLive;
+
     [Header("Player Info")]
     public float player_Hp;
     public float player_Max_Hp;
@@ -89,6 +91,10 @@ public class GameManager : MonoBehaviour
     public GameObject info_Panel; //인벤 판넬
     public GameObject reinfo_Pannel; //강화 판넬
     public Inventory inventory;
+
+
+
+
     private void Awake()
     {
         if(instance == null)
@@ -123,6 +129,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if(!isLive)
+        {
+            return;
+        }
         //지정된 시간안에 몬스터를 못 잡을 경우 시간과 잡은 몬스터 수 초기화
         playTime += Time.deltaTime;
 
@@ -208,11 +218,13 @@ public class GameManager : MonoBehaviour
             skill_Panel.SetActive(true);
             reinfo_Pannel.SetActive(false);
             info_Panel.SetActive(false);
+            Stop();
         }
 
         else
         {
             skill_Panel.SetActive(false);
+            Resume();
         }
     }
     //강화창 클릭
@@ -223,11 +235,13 @@ public class GameManager : MonoBehaviour
             skill_Panel.SetActive(false);
             reinfo_Pannel.SetActive(true);
             info_Panel.SetActive(false);
+            Stop();
         }
 
         else
         {
             reinfo_Pannel.SetActive(false);
+            Resume();
         }
     }
     //인벤토리 클릭
@@ -238,15 +252,36 @@ public class GameManager : MonoBehaviour
             skill_Panel.SetActive(false);
             reinfo_Pannel.SetActive(false);
             info_Panel.SetActive(true);
+            
+            
+            if(inventory.tapDataType.itemType != ItemData.ItemType.Equipment)
+            {
+                inventory.tapDataType.itemType = ItemData.ItemType.Equipment;
+            }
+
+            inventory.TabClick(inventory.tapDataType);
+
+            Stop();
         }
 
         else
         {
             info_Panel.SetActive(false);
+            Resume();
         }
     }
 
+    public void Stop()
+    {
+        isLive = false;
+        Time.timeScale = 0;
+    }
 
+    public void Resume()
+    {
+        isLive = true;
+        Time.timeScale = 1;
+    }
 
     public void Test_Click()
     {

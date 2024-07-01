@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.22, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 372016581, guid: 274d64617113287499ed1c4165d1d8f3, type: 3}
+  m_Sprite: {fileID: 334235598, guid: 9c0d87ef653e64d64bad8750fe0f6ed7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,7 +123,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 5.3554688, y: 5.1914062}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -166,10 +166,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 0}
-  Eqitem_data:
-  - {fileID: 11400000, guid: 458dad2e87cb04a008cf5d288928749a, type: 2}
-  - {fileID: 11400000, guid: d416ca1114110472f9018deb29030447, type: 2}
-  - {fileID: 11400000, guid: 05e8c5caa7f8e446ab0f154afff0e509, type: 2}
-  - {fileID: 11400000, guid: 72aea69c6c6fc41d2afffe4c75741191, type: 2}
+  eqBox_Data:
+  - {fileID: 334235598, guid: 9c0d87ef653e64d64bad8750fe0f6ed7, type: 3}
+  - {fileID: -1212212571, guid: 9c0d87ef653e64d64bad8750fe0f6ed7, type: 3}
+  - {fileID: 667875244, guid: 9c0d87ef653e64d64bad8750fe0f6ed7, type: 3}
+  - {fileID: -201976100, guid: 9c0d87ef653e64d64bad8750fe0f6ed7, type: 3}
   weapon_level: 0
   weapon: {fileID: 0}

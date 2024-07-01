@@ -8,7 +8,7 @@ public class ItemManager : MonoBehaviour
 {
     public ItemData data;
 
-    public ItemData[] Eqitem_data;
+    public Sprite[] eqBox_Data;
 
     public int weapon_level;
     public Weapon weapon;

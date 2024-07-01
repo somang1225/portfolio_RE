@@ -28,6 +28,11 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
+        if(!GameManager.Instance.isLive)
+        {
+            return;
+        }
+        
         timer += Time.deltaTime;
         stage_level = GameManager.Instance.stage;
 

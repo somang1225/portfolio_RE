@@ -7,7 +7,7 @@ using UnityEngine;
 public class ItemData : ScriptableObject
 {
     //일단 임시로 카테고리 지정
-    public enum ItemType {Equipment, Heal, Gold, Box } //장비 //힐 //골드 //박스
+    public enum ItemType {Equipment, Box, Heal, Gold } //장비 //힐 //골드 //박스
     //기본 데이터
     [Header("Main Info")]
     public ItemType itemType;
@@ -32,8 +32,7 @@ public class ItemData : ScriptableObject
 
     //특수한 무기 관련 데이터
     [Header("Equipment")]
-    public ItemData[] eqitem_data_nomal;
-    public ItemData[] eqitem_data_rare;
+    public ItemData[] eqitem_data;
 
 
     public int eq_defense;
