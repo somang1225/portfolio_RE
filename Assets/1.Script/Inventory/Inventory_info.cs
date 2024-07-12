@@ -36,7 +36,7 @@ public class Inventory_info : MonoBehaviour
 
     public void Using_Upgrade_Btn()
     {
-
+        
     }
 
 
