@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,9 +8,20 @@ public class Inventory_info : MonoBehaviour
 {
     public GameObject info_Item;
 
+    int[] item_level_point = new int[7] {0, 1, 1, 1, 1, 1, 2};
+
 
     [SerializeField]
     Text mytext;
+    [SerializeField]
+    Text before_Info;
+    [SerializeField]
+    Text after_Info;
+    [SerializeField]
+    Text success_Info;
+    [SerializeField]
+    Text upgrad_cost;
+
     Inven_Slot info_Item_Data;
 
     public void WakeUP()
@@ -36,13 +48,37 @@ public class Inventory_info : MonoBehaviour
 
     public void Using_Upgrade_Btn()
     {
+        int cur_item_Level = info_Item_Data.itemData.item_Level;
 
+        switch (cur_item_Level)
+        {
+            case int i when i < 5:
+                Upgrade_Info(cur_item_Level);
+                break;
+            default:
+                break;
+        }
     }
 
 
-    void Upgrade() //장비의 최대 강화 수치 //1:5 6:15 16:22(25)의 수치 
+    void Upgrade_Info(int cur_item_level) //장비의 최대 강화 수치 //1:5 6:15 16:22(25)의 수치 
     {
-        
+
+
+
+        before_Info.text = string.Format(
+            "+ {0}\n공격력 + {1}\n방어력 + {2}\n이동속도 + {3}"   //0 : 강화수치, 1:공격력 2:방어력 3:이동속도
+            , item_level_point[cur_item_level]
+            , item_level_point[cur_item_level]
+            , item_level_point[cur_item_level]
+            , item_level_point[cur_item_level]);
+
+        after_Info.text = string.Format(
+            "+ {0}\n공격력 + {1}\n방어력 + {2}\n이동속도 + {3}"   //0 : 강화수치, 1:공격력 2:방어력 3:이동속도
+            ,item_level_point[cur_item_level + 1]
+            ,item_level_point[cur_item_level + 1]
+            ,item_level_point[cur_item_level + 1]
+            ,item_level_point[cur_item_level + 1]);
     }
 
 }

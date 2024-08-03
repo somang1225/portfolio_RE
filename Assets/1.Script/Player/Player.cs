@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
-//using UnityEngine.InputSystem;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -36,8 +36,6 @@ public class Player : MonoBehaviour
         {
             return;
         }
-        inputVec.x = Input.GetAxisRaw("Horizontal");
-        inputVec.y = Input.GetAxisRaw("Vertical");
     }
 
     private void FixedUpdate()
@@ -49,6 +47,12 @@ public class Player : MonoBehaviour
         Vector2 moveVec = inputVec.normalized * Time.fixedDeltaTime * (speed + GameManager.Instance.ap_speed);
         rigidbody2D.MovePosition(rigidbody2D.position + moveVec);
     }
+
+    void OnMove(InputValue value)
+    {
+        inputVec = value.Get<Vector2>();
+    }
+
 
     private void LateUpdate()
     {

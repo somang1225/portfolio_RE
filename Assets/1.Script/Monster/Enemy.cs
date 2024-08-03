@@ -36,10 +36,6 @@ public class Enemy : MonoBehaviour //, IPoolObject
 
     private void FixedUpdate()
     {
-        if(!GameManager.Instance.isLive)
-        {
-            return;
-        }
         if (!isLive || animator.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
             return;
 
@@ -64,10 +60,6 @@ public class Enemy : MonoBehaviour //, IPoolObject
 
     private void LateUpdate()
     {
-        if(!GameManager.Instance.isLive)
-        {
-            return;
-        }
         if (target.position.x < rigidbody2D.position.x)
         {
             spriteRenderer.flipX = true;
@@ -148,7 +140,6 @@ public class Enemy : MonoBehaviour //, IPoolObject
             }
             else if (item_ran < 9) //장비 아이템 획득 70%
             {
-
                 //Instantiate(item_, transform.position, item_.transform.rotation);
                 DropItem(2);
             }
@@ -181,19 +172,10 @@ public class Enemy : MonoBehaviour //, IPoolObject
     void DropItem(int index)
     {
         GameObject dropItem = GameManager.Instance.pool.Get_item(index);
-
-        if(index ==2)
-        {
-            dropItem.GetComponent<SpriteRenderer>().sprite = dropItem.GetComponent<ItemManager>().eqBox_Data[3];
-        }
-
         dropItem.transform.position = gameObject.transform.position;
 
     }
 
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> e6459b3b9d6991ecb992ab211c6f7accb027787a
+
 }
