@@ -9,6 +9,8 @@ public class Inventory_info : MonoBehaviour
     public GameObject info_Item;
 
     int[] item_level_point = new int[7] {0, 1, 1, 1, 1, 1, 2};
+    int[] item_level_success = new int[7] {95, 90, 85, 80, 75, 70, 65};
+    int[] item_level_cost = new int[7] {1, 2, 3, 4, 5, 6, 7};
 
 
     [SerializeField]
@@ -49,7 +51,7 @@ public class Inventory_info : MonoBehaviour
     public void Using_Upgrade_Btn()
     {
         
-        int cur_item_Level = info_Item_Data.itemData.item_Level;
+        int cur_item_Level = info_Item_Data.solt_eq_level;
 
         switch (cur_item_Level)
         {
@@ -61,25 +63,54 @@ public class Inventory_info : MonoBehaviour
         }
     }
 
+    public void Upgrade_Item()
+    {
+        int item_ran = Random.Range(0, 100);
+
+        if (item_ran > item_level_success[info_Item_Data.solt_eq_level])
+        {
+            UnityEngine.Debug.Log("실패");
+            UnityEngine.Debug.Log(item_ran);
+            UnityEngine.Debug.Log(item_level_success[info_Item_Data.solt_eq_level]);
+        }
+        else if(item_ran < item_level_success[info_Item_Data.solt_eq_level])
+        {
+            UnityEngine.Debug.Log("성공");
+
+            info_Item_Data.solt_eq_level++;
+            Upgrade_Info(info_Item_Data.solt_eq_level);
+        }
+    }
+
 
     void Upgrade_Info(int cur_item_level) //장비의 최대 강화 수치 //1:5 6:15 16:22(25)의 수치 
     {
-
-
-
         before_Info.text = string.Format(
-            "+ {0}\n공격력 + {1}\n방어력 + {2}\n이동속도 + {3}"   //0 : 강화수치, 1:공격력 2:방어력 3:이동속도
+            "before\n+ {0}\n공격력 + {1}\n방어력 + {2}\n이동속도 + {3}"   //0 : 강화수치, 1:공격력 2:방어력 3:이동속도
             , item_level_point[cur_item_level]
             , item_level_point[cur_item_level]
             , item_level_point[cur_item_level]
             , item_level_point[cur_item_level]);
 
         after_Info.text = string.Format(
-            "+ {0}\n공격력 + {1}\n방어력 + {2}\n이동속도 + {3}"   //0 : 강화수치, 1:공격력 2:방어력 3:이동속도
+            "after\n+ {0}\n공격력 + {1}\n방어력 + {2}\n이동속도 + {3}"   //0 : 강화수치, 1:공격력 2:방어력 3:이동속도
             ,item_level_point[cur_item_level + 1]
             ,item_level_point[cur_item_level + 1]
             ,item_level_point[cur_item_level + 1]
             ,item_level_point[cur_item_level + 1]);
+
+
+        success_Info.text = string.Format(
+            "성공확률 : {0}%"
+            ,item_level_success[cur_item_level]
+        );
+
+        upgrad_cost.text = string.Format(
+            "강화비용 : {0}골드"
+            ,item_level_cost[cur_item_level]
+        );
+
+
     }
 
 }

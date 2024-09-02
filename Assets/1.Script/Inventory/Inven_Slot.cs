@@ -11,6 +11,7 @@ public class Inven_Slot : MonoBehaviour
     public int solt_eq_defense;
     public int solt_eq_speed;
     public int solt_eq_power;
+    public int solt_eq_level;
 
     public bool isusing;
     public GameObject usingEq;
