@@ -16,9 +16,9 @@ public class ItemData : ScriptableObject
     [Tooltip("모자 / 갑옷 / 장갑 / 신발 / 100~400")]
     
     public int itemID;
-    public int item_Level;
     public string itemName; //아이템 이름
     public string itemDesc; //아이템 설명
+    public int item_Level;
     public int itemCount; //아이템 개수
     public bool isUse; //아이템 사용 유무
 

@@ -48,6 +48,7 @@ public class Inventory_info : MonoBehaviour
 
     public void Using_Upgrade_Btn()
     {
+        
         int cur_item_Level = info_Item_Data.itemData.item_Level;
 
         switch (cur_item_Level)
