@@ -49,12 +49,29 @@ public class Inven_Slot : MonoBehaviour
         } 
         else
         {
-            text_Count.text = " ";
+            if(solt_eq_level > 0)
+            {
+                text_Count.text = "+ " + solt_eq_level;
+            }
+            else
+            {
+                text_Count.text = " ";
+            }
+            
 
+            if(usingEq != null)
+            {
+                solt_eq_defense = usingEq.GetComponent<Inven_Slot>().solt_eq_defense;
+                solt_eq_speed = usingEq.GetComponent<Inven_Slot>().solt_eq_speed;
+                solt_eq_power = usingEq.GetComponent<Inven_Slot>().solt_eq_power;
+                solt_eq_level = usingEq.GetComponent<Inven_Slot>().solt_eq_level;
+            }
             //장비 아이템의 데이터를 받는다
+            /*
             solt_eq_defense = itemData.eq_defense;
             solt_eq_speed = itemData.eq_speed;
             solt_eq_power = itemData.eq_power;
+            */
         
         }
 
@@ -132,7 +149,7 @@ public class Inven_Slot : MonoBehaviour
         usingEq.SetActive(true);
 
         ClearSlot();
-
+        GameManager.Instance.inventory.Update_EQ_State();
     }
 
 

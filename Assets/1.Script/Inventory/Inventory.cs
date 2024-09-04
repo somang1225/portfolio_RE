@@ -128,49 +128,36 @@ public class Inventory : MonoBehaviour
 
         eq_Slots[slotnum].itemData = _itemdata;
         eq_Slots[slotnum].usingEq = click_gameObject;
+        eq_Slots[slotnum].AddItem(_itemdata);
+
+        Update_EQ_State();
+
+        click_gameObject.GetComponent<Inven_Slot>().isusing = true;
+
+        click_gameObject.SetActive(false);
+    }
 
 
-        
-
-        //일단 장비창에 장비를 장착하도록 설정
-        switch(_itemdata.itemID / 100)
-        {
-            case 1:
-                eq_Slots[slotnum].AddItem(_itemdata);
-                break;
-
-            case 2:
-                eq_Slots[slotnum].AddItem(_itemdata);
-                break;
-
-            case 3:
-                eq_Slots[slotnum].AddItem(_itemdata);
-                break;
-                
-            case 4:
-                eq_Slots[slotnum].AddItem(_itemdata);
-                break;
-        }
-
+    public void Update_EQ_State()
+    {
         int eq_defense = 0;
         int eq_power = 0;
         int eq_speed = 0;
 
-        for (int i = 0; i < eq_Slots.Length; i++)
+        for (int i = 0; i < eq_Slots.Length; i++) //장비창의 장비를 확인하여 능력치 변경
         {
-            eq_defense += eq_Slots[i].solt_eq_defense;
-            eq_power += eq_Slots[i].solt_eq_power;
-            eq_speed += eq_Slots[i].solt_eq_speed;           
+            if(eq_Slots[i].usingEq == null)
+            {
+                continue;
+            }
+            eq_defense += eq_Slots[i].solt_eq_defense + eq_Slots[i].itemData.eq_defense;
+            eq_power += eq_Slots[i].solt_eq_power + eq_Slots[i].itemData.eq_power;
+            eq_speed += eq_Slots[i].solt_eq_speed + eq_Slots[i].itemData.eq_speed;
         }
 
         GameManager.Instance.eq_defense = eq_defense;
         GameManager.Instance.eq_power = eq_power;
         GameManager.Instance.eq_speed = eq_speed;
-
-        click_gameObject.GetComponent<Inven_Slot>().isusing = true;
-
-        click_gameObject.SetActive(false);
-
     }
 
 
@@ -211,7 +198,7 @@ public class Inventory : MonoBehaviour
             if(go_SlotsParent.transform.GetChild(i).GetComponent<Inven_Slot>().itemData.itemType == tapDataType.itemType && go_SlotsParent.transform.GetChild(i).GetComponent<Inven_Slot>().isusing == false)
             {
                 //아이템의 개수가 0이상이야 보인다
-                if(inven_Slots[i].itemData.itemCount > 0)
+                if(inven_Slots[i].itemData.itemCount > 0 || inven_Slots[i].itemData.itemType == ItemData.ItemType.Equipment)
                 {
                     go_SlotsParent.transform.GetChild(i).gameObject.SetActive(true);
                 }

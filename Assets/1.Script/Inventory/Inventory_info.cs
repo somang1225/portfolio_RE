@@ -63,6 +63,29 @@ public class Inventory_info : MonoBehaviour
         }
     }
 
+    public void Upgrade_star(int cur_item_Level)
+    {
+        /* 0:Helmet 1:Armor 2:Glove 3:Boot */
+        switch(info_Item_Data.itemData.itemID / 100)
+        {
+            case 1:
+                info_Item_Data.solt_eq_defense += item_level_point[cur_item_Level];
+                break;
+
+            case 2:
+                info_Item_Data.solt_eq_defense += item_level_point[cur_item_Level];
+                break;
+
+            case 3:
+                info_Item_Data.solt_eq_power += item_level_point[cur_item_Level];
+                break;
+                
+            case 4:
+                info_Item_Data.solt_eq_speed += item_level_point[cur_item_Level];
+                break;
+        }
+    }
+
     public void Upgrade_Item()
     {
         int item_ran = Random.Range(0, 100);
@@ -70,15 +93,16 @@ public class Inventory_info : MonoBehaviour
         if (item_ran > item_level_success[info_Item_Data.solt_eq_level])
         {
             UnityEngine.Debug.Log("실패");
-            UnityEngine.Debug.Log(item_ran);
-            UnityEngine.Debug.Log(item_level_success[info_Item_Data.solt_eq_level]);
         }
         else if(item_ran < item_level_success[info_Item_Data.solt_eq_level])
         {
             UnityEngine.Debug.Log("성공");
 
             info_Item_Data.solt_eq_level++;
+            Upgrade_star(info_Item_Data.solt_eq_level);
             Upgrade_Info(info_Item_Data.solt_eq_level);
+            Text_Made();
+            
         }
     }
 
@@ -87,17 +111,17 @@ public class Inventory_info : MonoBehaviour
     {
         before_Info.text = string.Format(
             "before\n+ {0}\n공격력 + {1}\n방어력 + {2}\n이동속도 + {3}"   //0 : 강화수치, 1:공격력 2:방어력 3:이동속도
-            , item_level_point[cur_item_level]
-            , item_level_point[cur_item_level]
-            , item_level_point[cur_item_level]
-            , item_level_point[cur_item_level]);
+            , cur_item_level
+            , info_Item_Data.solt_eq_power
+            , info_Item_Data.solt_eq_defense
+            , info_Item_Data.solt_eq_speed);
 
         after_Info.text = string.Format(
             "after\n+ {0}\n공격력 + {1}\n방어력 + {2}\n이동속도 + {3}"   //0 : 강화수치, 1:공격력 2:방어력 3:이동속도
-            ,item_level_point[cur_item_level + 1]
-            ,item_level_point[cur_item_level + 1]
-            ,item_level_point[cur_item_level + 1]
-            ,item_level_point[cur_item_level + 1]);
+            ,cur_item_level + 1
+            ,info_Item_Data.solt_eq_power + item_level_point[cur_item_level + 1]
+            ,info_Item_Data.solt_eq_defense + item_level_point[cur_item_level + 1]
+            ,info_Item_Data.solt_eq_speed + item_level_point[cur_item_level + 1]);
 
 
         success_Info.text = string.Format(

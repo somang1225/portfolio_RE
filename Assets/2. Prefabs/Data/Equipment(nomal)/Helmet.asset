@@ -17,7 +17,8 @@ MonoBehaviour:
   itemID: 101
   itemName: Helmet
   itemDesc: 
-  itemCount: 0
+  item_Level: 0
+  itemCount: 1
   isUse: 0
   baseDamage: 0
   baseCount: 0
