@@ -128,6 +128,7 @@ public class Inventory : MonoBehaviour
 
         eq_Slots[slotnum].itemData = _itemdata;
         eq_Slots[slotnum].usingEq = click_gameObject;
+        eq_Slots[slotnum].solt_eq_level = click_gameObject.GetComponent<Inven_Slot>().solt_eq_level;
         eq_Slots[slotnum].AddItem(_itemdata);
 
         Update_EQ_State();

@@ -102,6 +102,7 @@ public class Inventory_info : MonoBehaviour
             Upgrade_star(info_Item_Data.solt_eq_level);
             Upgrade_Info(info_Item_Data.solt_eq_level);
             Text_Made();
+            info_Item_Data.AddItem(info_Item_Data.itemData);
             
         }
     }
