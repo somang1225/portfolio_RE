@@ -28373,6 +28373,7 @@ MonoBehaviour:
   ap_mp: 0
   ap_speed: 0
   pp: 0
+  gold: 0
   player: {fileID: 481733770}
   pool: {fileID: 191318365}
   skill_Panel: {fileID: 298645263}
@@ -34685,7 +34686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1988607764
 RectTransform:
   m_ObjectHideFlags: 0

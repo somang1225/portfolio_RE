@@ -63,7 +63,7 @@ public class Inventory_info : MonoBehaviour
         }
     }
 
-    public void Upgrade_star(int cur_item_Level)
+    public void Upgrade_star(int cur_item_Level, int cur_item_Data)
     {
         /* 0:Helmet 1:Armor 2:Glove 3:Boot */
         switch(info_Item_Data.itemData.itemID / 100)
@@ -88,6 +88,17 @@ public class Inventory_info : MonoBehaviour
 
     public void Upgrade_Item()
     {
+        if(GameManager.Instance.gold - item_level_cost[info_Item_Data.solt_eq_level] < 0)
+        {
+            UnityEngine.Debug.Log("돈 없으니까 돈 모아오세요");
+            return;
+        }
+        else
+        {
+            GameManager.Instance.gold -= item_level_cost[info_Item_Data.solt_eq_level];
+        }
+        
+
         int item_ran = Random.Range(0, 100);
 
         if (item_ran > item_level_success[info_Item_Data.solt_eq_level])
@@ -99,7 +110,7 @@ public class Inventory_info : MonoBehaviour
             UnityEngine.Debug.Log("성공");
 
             info_Item_Data.solt_eq_level++;
-            Upgrade_star(info_Item_Data.solt_eq_level);
+            Upgrade_star(info_Item_Data.solt_eq_level, info_Item_Data.itemData.itemID);
             Upgrade_Info(info_Item_Data.solt_eq_level);
             Text_Made();
             info_Item_Data.AddItem(info_Item_Data.itemData);
@@ -117,12 +128,47 @@ public class Inventory_info : MonoBehaviour
             , info_Item_Data.solt_eq_defense
             , info_Item_Data.solt_eq_speed);
 
-        after_Info.text = string.Format(
-            "after\n+ {0}\n공격력 + {1}\n방어력 + {2}\n이동속도 + {3}"   //0 : 강화수치, 1:공격력 2:방어력 3:이동속도
-            ,cur_item_level + 1
-            ,info_Item_Data.solt_eq_power + item_level_point[cur_item_level + 1]
-            ,info_Item_Data.solt_eq_defense + item_level_point[cur_item_level + 1]
-            ,info_Item_Data.solt_eq_speed + item_level_point[cur_item_level + 1]);
+        /* 0:Helmet 1:Armor 2:Glove 3:Boot */
+        switch(info_Item_Data.itemData.itemID / 100)
+        {
+            case 1:
+            after_Info.text = string.Format(
+                "after\n+ {0}\n공격력 + {1}\n방어력 + {2}\n이동속도 + {3}"   //0 : 강화수치, 1:공격력 2:방어력 3:이동속도
+                ,cur_item_level + 1
+                ,info_Item_Data.solt_eq_power  //+ item_level_point[cur_item_level + 1]
+                ,info_Item_Data.solt_eq_defense + item_level_point[cur_item_level + 1]
+                ,info_Item_Data.solt_eq_speed);  //+ item_level_point[cur_item_level + 1]);
+                break;
+
+            case 2:
+            after_Info.text = string.Format(
+                "after\n+ {0}\n공격력 + {1}\n방어력 + {2}\n이동속도 + {3}"   //0 : 강화수치, 1:공격력 2:방어력 3:이동속도
+                ,cur_item_level + 1
+                ,info_Item_Data.solt_eq_power  //+ item_level_point[cur_item_level + 1]
+                ,info_Item_Data.solt_eq_defense + item_level_point[cur_item_level + 1]
+                ,info_Item_Data.solt_eq_speed);  //+ item_level_point[cur_item_level + 1]);
+                break;
+
+            case 3:
+            after_Info.text = string.Format(
+                "after\n+ {0}\n공격력 + {1}\n방어력 + {2}\n이동속도 + {3}"   //0 : 강화수치, 1:공격력 2:방어력 3:이동속도
+                ,cur_item_level + 1
+                ,info_Item_Data.solt_eq_power + item_level_point[cur_item_level + 1]
+                ,info_Item_Data.solt_eq_defense // + item_level_point[cur_item_level + 1]
+                ,info_Item_Data.solt_eq_speed);  //+ item_level_point[cur_item_level + 1]);
+                break;
+                
+            case 4:
+            after_Info.text = string.Format(
+                "after\n+ {0}\n공격력 + {1}\n방어력 + {2}\n이동속도 + {3}"   //0 : 강화수치, 1:공격력 2:방어력 3:이동속도
+                ,cur_item_level + 1
+                ,info_Item_Data.solt_eq_power  //+ item_level_point[cur_item_level + 1]
+                ,info_Item_Data.solt_eq_defense // + item_level_point[cur_item_level + 1]
+                ,info_Item_Data.solt_eq_speed + item_level_point[cur_item_level + 1]);
+                break;
+        }
+
+        
 
 
         success_Info.text = string.Format(

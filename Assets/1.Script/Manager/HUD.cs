@@ -37,7 +37,7 @@ public class HUD : MonoBehaviour
                 break;
 
             case InfoType.Power:
-                mytext.text = string.Format("전투력 {0}", GameManager.Instance.player_damage);
+                mytext.text = string.Format("전투력 {0}", GameManager.Instance.player_damage + GameManager.Instance.eq_power);
                 break;
 
             case InfoType.Kill_bar:

@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
     [Header("Game Money")]
     //게임 재화
     public int pp;
-    public int gold{get; private set;}
+    public int gold;
 
 
     [Header("Game Script")]
